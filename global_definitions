@@ -1,0 +1,28 @@
+#!/bin/bash
+
+# Compilation-related Variables
+
+ARCH=${ARCH=arm64}
+CROSS_COMPILE=${CROSS_COMPILE=aarch64-linux-gnu-}
+
+DIST_PATH=${DIST_PATH=$(pwd)"/dist"}
+INSTALL_PATH=$DIST_PATH"/"
+
+INSTALL_MOD_PATH=$DIST_PATH"/"
+INSTALL_HDR_PATH=$DIST_PATH"/usr/"
+GIT_PROTOCOL="git://"
+
+GIT_COMMAND="clone"
+GITCLONE_ARGS=""
+
+# Debootstrap Variables
+
+ROOTPATH=$DIST_PATH
+SUITE="stable"
+
+# Base Variables
+
+BCMRPI3_CONFFILE="bcmrpi3_config"
+# For more details see issue https://github.com/raspberrypi/linux/issues/2136
+THERMAL_PATCH_FILE="thermal_patch"
+THERMAL_PATCH_DEST="linux/drivers/thermal/Kconfig"

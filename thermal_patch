@@ -1,0 +1,4 @@
+418c418
+< depends on ARCH_BCM || COMPILE_TEST
+---
+> depends on ARCH_BCM || ARCH_BCM2835 || COMPILE_TEST

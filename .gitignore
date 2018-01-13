@@ -1,0 +1,10 @@
+# temp files
+*~
+**/*~
+
+# Vim undo files
+*.un~
+**/*.un~
+
+# dist
+dist/
