@@ -2,6 +2,10 @@
 
 . global_definitions
 
+if [ -e $DIST_PATH ]; then
+    mkdir -p $DIST_PATH;
+fi
+
 if [ ! $SKIP_KERNELFETCH ]; then
     echo "Fetching kernel using git clone..."
     git clone $GITCLONE_ARGS ${GIT_PROTOCOL}github.com/raspberrypi/linux
