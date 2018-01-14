@@ -17,13 +17,52 @@ GITCLONE_ARGS=""
 
 # Debootstrap Variables
 
-ROOTPATH=$BUILD_PATH
-SUITE="stable"
+ROOT_PATH=${ROOT_PATH=$DIST_PATH"/rootfs/"}
+mkdir -p $ROOT_PATH
+SUITE=${SUITE="stable"}
 DEB_ARCH=${ARCH-arm64}
+MIRROR=${MIRROR="http://httpredir.debian.org/debian/"}
 
-# Base Variables
+# Detect available debootstrap file
+if [ ! $DEBOOTSTRAP_BIN ]; then 
+    if [ -e /usr/sbin/debootstrap]; then
+        DEBOOTSTRAP_BIN=/usr/bin/debootstrap;
+    elif [ -e $(which debootstrap)]; then
+        DEBOOTSTRAP_BIN=$(which debootstrap);
+    fi
+fi
 
+# Allow you to run 32-bit ARM dynamically linked binaries 
+# That was done by installing libc6-armhf-cross or libc6-armel-cross
+ARMHF_SUPPORT=${ARMHF_SUPPORT=0}
+ARMEL_SUPPORT=${ARMEL_SUPPORT=0}
+
+LIBC_ARMHF=libc6-armhf-cross
+LIBC_ARMEL=libc6-armel-cross
+
+PATH_ARMHF=/usr/arm-linux-gnueabihf/
+PATH_ARMEL=/usr/arm-linux-gnueabi/
+LD_ARMHF=/usr/arm-linux-gnueabihf/lib/ld-linux-armhf.so.3
+LD_ARMEL=/usr/arm-linux-gnueabi/lib/ld-linux.so.3
+
+
+# rpi-firmware related
+FW_BOOTCODE="bootcode.bin "
+FW_START="start.elf start_x.elf start_cd.elf start_db.elf "
+FW_FIXUP="fixup.elf fixup_x.elf fixup_cd.elf fixup_db.elf "
+FW_LICENSE="COPYING.linux LICENCE.broadcom "
+
+FW_BOOT=${FW_BOOTCODE}${FW_START}${FW_FIXUP}${FW_LICENSE}
+
+
+# Pre-Compilation Variables
+
+# This includes some fixes, along with a downstream mmc driver
+# For more details see
+# bcm2835-v4l2: https://github.com/raspberrypi/linux/issues/2117
+# MMC issue: https://github.com/raspberrypi/linux/issues/2124
 BCMRPI3_CONFFILE="bcmrpi3_config"
+
 # For more details see issue https://github.com/raspberrypi/linux/issues/2136
 THERMAL_PATCH_FILE="thermal_patch"
 THERMAL_PATCH_DEST="linux/drivers/thermal/Kconfig"
