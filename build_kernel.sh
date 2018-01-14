@@ -53,7 +53,7 @@ fi
 popd
 pushd $INSTALL_PATH
 cp -v vmlinuz* kernel8.img
-cp -v $( find dtbs | grep -E 'bcm(*.)rpi' ) .
+cp -v $( find dtbs | grep -E 'bcm(.*)rpi' ) .
 cp -a $( find dtbs | grep -E 'overlays$' ) .
 popd
 
