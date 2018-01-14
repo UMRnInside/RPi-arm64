@@ -21,19 +21,23 @@ Run `./build_kernel.sh`
 #### `ARCH`
 Select specified ARCH to build [Default arm64]
 
-`ARCH=arm64 ./build_kernel.sh`
+    `ARCH=arm64 ./build_kernel.sh`
 #### `CROSS_COMPILE`
 Specify toolchain to use [Default aarch64-linux-gnu- ]
 
-`CROSS_COMPILE=aarcch64-linux-gnu- ./build.sh`
+    `CROSS_COMPILE=aarcch64-linux-gnu- ./build.sh`
+#### `JOBCOUNT`
+Passed to `make -j ` [Default $(nproc)]
+
+    `JOBCOUNT=4 ./build_kernel.sh`
 #### `BUILD_PATH`
 Specify place to put the kerneli [Default $(pwd)/build ]
 
-`BUILD_PATH=./build ./build_kernel.sh`
+    `BUILD_PATH=./build ./build_kernel.sh`
 #### `SKIP_KERNELFETCH`
 Skip kernel fetch.
 
-`SKIP_KERNELFETCH=1 ./build_kernel.sh`
+    `SKIP_KERNELFETCH=1 ./build_kernel.sh`
 
 ### Extra info:
 `build_kernel.sh` will apply some fixes, for more details see
@@ -53,23 +57,27 @@ Run `./run_debootstrap.sh`
 * Running on ARM64 platform, or `qemu-aarch64-static` avalable in `PATH`
 
 ### Options
-#### `MIRROR`
-Specify mirror site to use.
+#### `ROOT_PATH`
+Specify where to make rootfs.
+It can be manually moved to other places [Default ./dist/rootfs/]
 
-`sudo MIRROR=https://mirrors.ustc.edu.cn/debian/ ./run_debootstrap.sh `
+    `sudo ROOT_PATH=./dist/rootfs ./run_debootstrap.sh`
+#### `MIRROR`
+Specify mirror site to use [Default http://httpredir.debian.org/debian/]
+
+    `sudo MIRROR=https://mirrors.ustc.edu.cn/debian/ ./run_debootstrap.sh `
 
 #### `SUITE`
-Specify the suite to be installed, depend on `debootstrap`
+Specify the suite to be installed, depend on `debootstrap` [Default stable]
 
-`sudo SUITE=stable ./run_debootstrap.sh`
-
+    `sudo SUITE=stable ./run_debootstrap.sh`
 
 #### `DEB_INCLUDE`
-Include certain packets.
+Include certain packets. [Default ""]
 
-`sudo DEB_INCLUDE=vim,wpasupplicant,hostapd,udhcpd ./run_debootstrap.sh`
+    `sudo DEB_INCLUDE=vim,wpasupplicant,hostapd,udhcpd ./run_debootstrap.sh`
 
 #### `ARMHF_SUPPORT` and `ARMEL_SUPPORT`
-Allow you to run dynamically linked armhf/armel binaries.
+Allow you to run dynamically linked armhf/armel binaries. [Default 0]
 
-`sudo ARMHF_SUPPORT=1 ./run_debootstrap.sh`
+    `sudo ARMHF_SUPPORT=1 ./run_debootstrap.sh`

@@ -7,7 +7,7 @@ mkdir -p $INSTALL_PATH
 
 CHECKOUT_DEST="rpi-4.12.y"
 if [ ! $SKIP_KERNELFETCH ]; then
-    echo "Fetching kernel using git clone..."
+    echo "Fetching kernel using git clone, target $CHECKOUT_TARGET ..."
     git clone $GITCLONE_ARGS ${GIT_PROTOCOL}github.com/raspberrypi/linux -b $CHECKOUT_DEST
 else
     echo "Skipping kernel fetch, as SKIP_KERNELFETCH is set"
@@ -37,7 +37,7 @@ make modules
 echo "Making dtbs..."
 make dtbs
 
-echo "Installing to $INSTALL_PATH..."
+echo "Exporting to $INSTALL_PATH..."
 make install
 make modules_install
 make dtbs_install
@@ -55,5 +55,6 @@ pushd $INSTALL_PATH
 cp -v vmlinuz* kernel8.img
 cp -v $( find dtbs | grep -E 'bcm(*.)rpi' ) .
 cp -a $( find dtbs | grep -E 'overlays$' ) .
+popd
 
-echo "Done."
+echo "Done, kernel is ready in $INSTALL_PATH"
