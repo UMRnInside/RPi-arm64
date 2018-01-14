@@ -1,5 +1,6 @@
 #!/bin/bash
 
+. global_definitions
 DEB_INCLUDE_INITIAL="busybox"
 if [ ! $DEB_INCLUDE ]; then
     DEB_INCLUDE=${DEB_IINCLUDE_INITIAL},${DEB_INCLUDE_EXTRA};
@@ -27,7 +28,7 @@ DEB_NATIVE=0
 DEB_QEMU=0
 if [ $(uname -m) = "aarch64" ]; then
     DEB_NATIVE=1;
-elif [ -e $(which qemu-aarch64-static)]; then
+elif [ -e $(which qemu-aarch64-static) ]; then
     DEB_QEMU=1
     qemu_path=$(which qemu-aarch64-static)
     echo "Detected available qemu at $qemu_path"
