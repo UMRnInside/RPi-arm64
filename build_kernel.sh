@@ -2,24 +2,18 @@
 
 . global_definitions
 
-if [ ! -e $DIST_PATH ]; then
-    mkdir -p $DIST_PATH;
-fi
+mkdir -p $BUILD_PATH
+mkdir -p $INSTALL_PATH
 
+CHECKOUT_DEST="rpi-4.12.y"
 if [ ! $SKIP_KERNELFETCH ]; then
     echo "Fetching kernel using git clone..."
-    git clone $GITCLONE_ARGS ${GIT_PROTOCOL}github.com/raspberrypi/linux
+    git clone $GITCLONE_ARGS ${GIT_PROTOCOL}github.com/raspberrypi/linux -b $CHECKOUT_DEST
 else
     echo "Skipping kernel fetch, as SKIP_KERNELFETCH is set"
 fi
 
 # Prepare for building
-
-CHECKOUT_DEST="rpi-4.12.y"
-echo "Checking out $CHECKOUT_DEST..."
-pushd linux
-git checkout $CHECKOUT_DEST
-popd
 
 echo "Patching $THERMAL_PATCH_DEST"
 echo "See https://github.com/raspberrypi/linux/issues/2136 for more infomation"
