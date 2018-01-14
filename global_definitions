@@ -38,13 +38,14 @@ fi
 ARMHF_SUPPORT=${ARMHF_SUPPORT=0}
 ARMEL_SUPPORT=${ARMEL_SUPPORT=0}
 
-LIBC_ARMHF=libc6-armhf-cross
-LIBC_ARMEL=libc6-armel-cross
+LIBC_ARMHF=libc6:armhf
+LIBC_ARMEL=libc6:armel
 
-PATH_ARMHF=/usr/arm-linux-gnueabihf/
-PATH_ARMEL=/usr/arm-linux-gnueabi/
-LD_ARMHF=/usr/arm-linux-gnueabihf/lib/ld-linux-armhf.so.3
-LD_ARMEL=/usr/arm-linux-gnueabi/lib/ld-linux.so.3
+# Not required when using libc6:*
+#PATH_ARMHF=/usr/arm-linux-gnueabihf/
+#PATH_ARMEL=/usr/arm-linux-gnueabi/
+#LD_ARMHF=/usr/arm-linux-gnueabihf/lib/ld-linux-armhf.so.3
+#LD_ARMEL=/usr/arm-linux-gnueabi/lib/ld-linux.so.3
 
 
 # rpi-firmware related

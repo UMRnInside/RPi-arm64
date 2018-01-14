@@ -39,13 +39,19 @@ echo "Running debootstrap..."
 $DEBOOTSTRAP_BIN $extraargs --arch $DEB_ARCH --include $DEB_INCLUDE $SUITE $ROOT_PATH $MIRROR
 
 echo "Running post-debootstrap tasks..."
+
 if [ $ARMHF_SUPPORT ]; then
     echo "Adding armhf support"
-    chroot $ROOT_PATH sh -c "cd /lib;ln -s $LD_ARMHF;cd /usr/lib; ln -s $PATH_ARMHF"
+    chroot $ROOT_PATH dpkg --add-architecure armhf
+    chroot $ROOT_PATH apt-get update
+    chroot $ROOT_PATH apt-get -y install libc6:armhf
 fi
+
 if [ $ARMEL_SUPPORT ]; then
     echo "Adding armel support"
-    chroot $ROOT_PATH sh -c "cd /lib;ln -s $LD_ARMEL;cd /usr/lib; ln -s $PATH_ARMEL"
+    chroot $ROOT_PATH dpkg --add-architecure armel
+    chroot $ROOT_PATH apt-get update
+    chroot $ROOT_PATH apt-get -y install libc6:armel
 fi
 
 if [ ! $SKIP_SOURCES_MOD ]; then
