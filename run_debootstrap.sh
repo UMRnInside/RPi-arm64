@@ -1,7 +1,7 @@
 #!/bin/bash
 
 . global_definitions
-DEB_INCLUDE_INITIAL="busybox,wpasuplicant,vim"
+DEB_INCLUDE_INITIAL="busybox,wpasupplicant,vim"
 if [ ! $DEB_INCLUDE ]; then
     DEB_INCLUDE=${DEB_INCLUDE_INITIAL},${DEB_INCLUDE_EXTRA};
 fi
