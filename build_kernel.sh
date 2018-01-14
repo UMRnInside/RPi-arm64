@@ -17,7 +17,7 @@ fi
 
 echo "Patching $THERMAL_PATCH_DEST"
 echo "See https://github.com/raspberrypi/linux/issues/2136 for more infomation"
-patch $THERMAL_PATCH_FILE $THERMAL_PATCH_DEST
+patch $THERMAL_PATCH_DEST $THERMAL_PATCH_FILE
 
 echo "Copying config..."
 cp $BCMRPI3_CONFFILE linux/.config
