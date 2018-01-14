@@ -2,7 +2,7 @@
 
 . global_definitions
 
-if [ -e $DIST_PATH ]; then
+if [ ! -e $DIST_PATH ]; then
     mkdir -p $DIST_PATH;
 fi
 
