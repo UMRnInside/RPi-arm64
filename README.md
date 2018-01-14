@@ -56,7 +56,7 @@ Run `./run_debootstrap.sh`
 #### `MIRROR`
 Specify mirror site to use.
 
-`sudp MIRROR=https://mirrors.ustc.edu.cn/debian/ ./run_debootstrap.sh `
+`sudo MIRROR=https://mirrors.ustc.edu.cn/debian/ ./run_debootstrap.sh `
 
 #### `SUITE`
 Specify the suite to be installed, depend on `debootstrap`
