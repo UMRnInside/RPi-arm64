@@ -27,7 +27,7 @@ MIRROR=${MIRROR="http://httpredir.debian.org/debian/"}
 # Detect available debootstrap file
 if [ ! $DEBOOTSTRAP_BIN ]; then 
     if [ -e /usr/sbin/debootstrap ]; then
-        DEBOOTSTRAP_BIN=/usr/bin/debootstrap;
+        DEBOOTSTRAP_BIN=/usr/sbin/debootstrap;
     elif [ -e $(which debootstrap) ]; then
         DEBOOTSTRAP_BIN=$(which debootstrap);
     fi
