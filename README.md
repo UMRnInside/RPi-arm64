@@ -30,6 +30,14 @@ Specify toolchain to use [Default aarch64-linux-gnu- ]
 Passed to `make -j ` [Default $(nproc)]
 
     `JOBCOUNT=4 ./build_kernel.sh`
+#### `FETCH_METHOD`
+Specify way to fetch kernel source code [Default git]
+
+Alternatives (**Case SENSITIVE**):
+* git
+* wget
+
+    `FETCH_METHOD=wget ./build_kernel.sh`
 #### `BUILD_PATH`
 Specify place to put the kerneli [Default $(pwd)/build ]
 
