@@ -27,6 +27,7 @@ mkdir -p $ROOT_PATH
 DEB_NATIVE=0
 DEB_QEMU=0
 if [ $(uname -m) = "aarch64" ]; then
+    echo "It seems that you can run them natively."
     DEB_NATIVE=1;
 elif [ -e $(which qemu-aarch64-static) ]; then
     DEB_QEMU=1
@@ -41,32 +42,32 @@ $DEBOOTSTRAP_BIN $extraargs --arch $DEB_ARCH --include $DEB_INCLUDE $SUITE $ROOT
 
 echo "Running post-debootstrap tasks..."
 
-if [ $ARMHF_SUPPORT ]; then
+if [ $ARMHF_SUPPORT -eq 1 ]; then
     echo "Adding armhf support"
     chroot $ROOT_PATH dpkg --add-architecure armhf
     chroot $ROOT_PATH apt-get update
     chroot $ROOT_PATH apt-get -y install libc6:armhf
 fi
 
-if [ $ARMEL_SUPPORT ]; then
+if [ $ARMEL_SUPPORT -eq 1 ]; then
     echo "Adding armel support"
     chroot $ROOT_PATH dpkg --add-architecure armel
     chroot $ROOT_PATH apt-get update
     chroot $ROOT_PATH apt-get -y install libc6:armel
 fi
 
-if [ ! $SKIP_SOURCES_MOD ]; then
+if [ ! $SKIP_SOURCES_MOD -eq 1 ]; then
     echo "Modifing /etc/apt/sources.list ..."
     echo "NOTE: $SUITE-backports will not be put in the file"
     echo "deb $MIRROR $SUITE main non-free contrib" > $ROOT_PATH/etc/apt/sources.list
 fi
 
-if [ ! $SKIP_SOURCEUPDATE ]; then
+if [ ! $SKIP_SOURCEUPDATE -eq 1 ]; then
     echo "Running apt-get update..."
     chroot $ROOT_PATH apt-get update
 fi
 
-if [ ! $SKIP_FWINST ]; then
+if [ ! $SKIP_FWINST -eq 1 ]; then
     echo "Installing firmwares..."
     firmwares="firmware-brcm80211 firmware-atheros firmware-atheros firmware-iwlwifi firmware-realtek"
     chroot $ROOT_PATH apt install -y $firmwares 
