@@ -2,6 +2,9 @@
 *~
 **/*~
 
+# .zip
+*.zip
+
 # Vim undo files
 *.un~
 **/*.un~

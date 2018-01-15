@@ -7,8 +7,14 @@ mkdir -p $INSTALL_PATH
 
 CHECKOUT_DEST="rpi-4.12.y"
 if [ ! $SKIP_KERNELFETCH ]; then
-    echo "Fetching kernel using git clone, target $CHECKOUT_TARGET ..."
-    git clone $GITCLONE_ARGS ${GIT_PROTOCOL}github.com/raspberrypi/linux -b $CHECKOUT_DEST
+    if [ $FETCH_METHOD == "git" ]; then
+        echo "Fetching kernel using git clone, target $CHECKOUT_DEST ..."
+        git clone $GITCLONE_ARGS ${GIT_PROTOCOL}github.com/raspberrypi/linux -b $CHECKOUT_DEST
+    elif [ $FETCH_METHOD == "wget" ]; then
+        echo "Fetching kernel using wget, target $CHECKOUT_DEST ..."
+        wget -c https://github.com/raspberrypi/linux/archive/${CHECKOUT_DEST}.zip
+        unzip $CHECKOUT_DEST.zip
+    fi
 else
     echo "Skipping kernel fetch, as SKIP_KERNELFETCH is set"
 fi
