@@ -14,6 +14,7 @@ if [ ! $SKIP_KERNELFETCH ]; then
         echo "Fetching kernel using wget, target $CHECKOUT_DEST ..."
         wget -c https://github.com/raspberrypi/linux/archive/${CHECKOUT_DEST}.zip
         unzip $CHECKOUT_DEST.zip
+        mv linux-${CHECKOUT_DEST} linux
     fi
 else
     echo "Skipping kernel fetch, as SKIP_KERNELFETCH is set"
@@ -49,7 +50,7 @@ make modules_install
 make dtbs_install
 make headers_install
 
-if [! -e $INSTALL_HDR_PATH ]; then
+if [ ! -e $INSTALL_HDR_PATH ]; then
     echo "headers_install seems not working, manually copying files..."
     mkdir -p $INSTALL_HDR_PATH
     cp -a usr/include $INSTALL_HDR_PATH
@@ -58,6 +59,7 @@ fi
 # After-compilation mods
 popd
 pushd $INSTALL_PATH
+rm -v *.old
 cp -v vmlinuz* kernel8.img
 cp -v $( find dtbs | grep -E 'bcm(.*)rpi' ) .
 cp -a $( find dtbs | grep -E 'overlays$' ) .
