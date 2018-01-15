@@ -4,7 +4,7 @@ Scripts, configs and hacks to make a ARM64 system for Raspberry Pi 3
 Currently supported:
 
 * Build kernel
-* Make rootfs using _debootstrap_
+* Build rootfs using _debootstrap_
 
 ## Build kernel
 Run `./build_kernel.sh`
@@ -47,11 +47,11 @@ Skip kernel fetch.
  * [Issue 2136](https://github.com/raspberrypi/linux/issues/2136)
 
 ## Make rootfs
-Run `./run_debootstrap.sh`
+Run `./root_debootstrap.sh`
 
 ### Requirements
 * Running as root, for example,
-    * `sudo ./run_debootstrap.sh`
+    * `sudo ./root_debootstrap.sh`
 * `debootstrap`
 * `chroot`
 * Running on ARM64 platform, or `qemu-aarch64-static` avalable in `PATH`
@@ -61,23 +61,23 @@ Run `./run_debootstrap.sh`
 Specify where to make rootfs.
 It can be manually moved to other places [Default ./dist/rootfs/]
 
-    `sudo ROOT_PATH=./dist/rootfs ./run_debootstrap.sh`
+    `sudo ROOT_PATH=./dist/rootfs ./root_debootstrap.sh`
 #### `MIRROR`
 Specify mirror site to use [Default http://httpredir.debian.org/debian/]
 
-    `sudo MIRROR=https://mirrors.ustc.edu.cn/debian/ ./run_debootstrap.sh `
+    `sudo MIRROR=https://mirrors.ustc.edu.cn/debian/ ./root_debootstrap.sh `
 
 #### `SUITE`
 Specify the suite to be installed, depend on `debootstrap` [Default stable]
 
-    `sudo SUITE=stable ./run_debootstrap.sh`
+    `sudo SUITE=stable ./root_debootstrap.sh`
 
 #### `DEB_INCLUDE`
 Include certain packets. [Default ""]
 
-    `sudo DEB_INCLUDE=vim,wpasupplicant,hostapd,udhcpd ./run_debootstrap.sh`
+    `sudo DEB_INCLUDE=vim,wpasupplicant,hostapd,udhcpd ./root_debootstrap.sh`
 
 #### `ARMHF_SUPPORT` and `ARMEL_SUPPORT`
 Allow you to run dynamically linked armhf/armel binaries. [Default 0]
 
-    `sudo ARMHF_SUPPORT=1 ./run_debootstrap.sh`
+    `sudo ARMHF_SUPPORT=1 ./root_debootstrap.sh`
