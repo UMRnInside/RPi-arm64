@@ -21,15 +21,15 @@ Run `./build_kernel.sh`
 #### `ARCH`
 Select specified ARCH to build [Default arm64]
 
-    `ARCH=arm64 ./build_kernel.sh`
+    ARCH=arm64 ./build_kernel.sh
 #### `CROSS_COMPILE`
 Specify toolchain to use [Default aarch64-linux-gnu- ]
 
-    `CROSS_COMPILE=aarcch64-linux-gnu- ./build.sh`
+    CROSS_COMPILE=aarcch64-linux-gnu- ./build.sh
 #### `JOBCOUNT`
 Passed to `make -j ` [Default $(nproc)]
 
-    `JOBCOUNT=4 ./build_kernel.sh`
+    JOBCOUNT=4 ./build_kernel.sh
 #### `FETCH_METHOD`
 Specify way to fetch kernel source code [Default git]
 
@@ -37,15 +37,15 @@ Alternatives (**Case SENSITIVE**):
 * git
 * wget
 
-    `FETCH_METHOD=wget ./build_kernel.sh`
+    FETCH_METHOD=wget ./build_kernel.sh
 #### `BUILD_PATH`
 Specify place to put the kerneli [Default $(pwd)/build ]
 
-    `BUILD_PATH=./build ./build_kernel.sh`
+    BUILD_PATH=./build ./build_kernel.sh
 #### `SKIP_KERNELFETCH`
 Skip kernel fetch.
 
-    `SKIP_KERNELFETCH=1 ./build_kernel.sh`
+    SKIP_KERNELFETCH=1 ./build_kernel.sh
 
 ### Extra info:
 `build_kernel.sh` will apply some fixes, for more details see
@@ -69,23 +69,23 @@ Run `./root_debootstrap.sh`
 Specify where to make rootfs.
 It can be manually moved to other places [Default ./dist/rootfs/]
 
-    `sudo ROOT_PATH=./dist/rootfs ./root_debootstrap.sh`
+    sudo ROOT_PATH=./dist/rootfs ./root_debootstrap.sh
 #### `MIRROR`
 Specify mirror site to use [Default http://httpredir.debian.org/debian/]
 
-    `sudo MIRROR=https://mirrors.ustc.edu.cn/debian/ ./root_debootstrap.sh `
+    sudo MIRROR=https://mirrors.ustc.edu.cn/debian/ ./root_debootstrap.sh
 
 #### `SUITE`
 Specify the suite to be installed, depend on `debootstrap` [Default stable]
 
-    `sudo SUITE=stable ./root_debootstrap.sh`
+    sudo SUITE=stable ./root_debootstrap.sh
 
 #### `DEB_INCLUDE`
 Include certain packets. [Default ""]
 
-    `sudo DEB_INCLUDE=vim,wpasupplicant,hostapd,udhcpd ./root_debootstrap.sh`
+    sudo DEB_INCLUDE=vim,wpasupplicant,hostapd,udhcpd ./root_debootstrap.sh
 
 #### `ARMHF_SUPPORT` and `ARMEL_SUPPORT`
 Allow you to run dynamically linked armhf/armel binaries. [Default 0]
 
-    `sudo ARMHF_SUPPORT=1 ./root_debootstrap.sh`
+    sudo ARMHF_SUPPORT=1 ./root_debootstrap.sh
