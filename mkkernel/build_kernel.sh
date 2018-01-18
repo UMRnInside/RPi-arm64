@@ -1,6 +1,6 @@
 #!/bin/bash
 
-. global_definitions
+. $(dirname $0)/../global_definitions
 
 mkdir -p $BUILD_PATH
 mkdir -p $INSTALL_PATH
