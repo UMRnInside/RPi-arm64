@@ -5,6 +5,8 @@
 mkdir -p $BUILD_PATH
 mkdir -p $INSTALL_PATH
 
+pushd $BUILD_PATH
+
 CHECKOUT_DEST="rpi-4.12.y"
 if [ ! $SKIP_KERNELFETCH ]; then
     if [ $FETCH_METHOD == "git" ]; then
@@ -27,7 +29,7 @@ echo "See https://github.com/raspberrypi/linux/issues/2136 for more infomation"
 patch $THERMAL_PATCH_DEST $THERMAL_PATCH_FILE
 
 echo "Copying config..."
-cp $BCMRPI3_CONFFILE linux/.config
+cp $BCMRPI3_CONFFILE $BUILD_PATH/linux/.config
 
 # Environmental configs
 export ARCH CROSS_COMPILE INSTALL_PATH INSTALL_MOD_PATH INSTALL_HDR_PATH

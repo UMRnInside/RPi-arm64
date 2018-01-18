@@ -5,8 +5,8 @@
 ARCH=${ARCH=arm64}
 CROSS_COMPILE=${CROSS_COMPILE=aarch64-linux-gnu-}
 
-BUILD_PATH=${BUILD_PATH=$(pwd)/build}
-DIST_PATH=${DIST_PATH=$(pwd)/dist}
+BUILD_PATH=${BUILD_PATH=$(dirname $0)/../build}
+DIST_PATH=${DIST_PATH=$(dirname $0)/../dist}
 INSTALL_PATH=$BUILD_PATH/
 
 INSTALL_MOD_PATH=$BUILD_PATH/
@@ -65,8 +65,8 @@ FW_BOOT=${FW_BOOTCODE}${FW_START}${FW_FIXUP}${FW_LICENSE}
 # For more details see
 # bcm2835-v4l2: https://github.com/raspberrypi/linux/issues/2117
 # MMC issue: https://github.com/raspberrypi/linux/issues/2124
-BCMRPI3_CONFFILE="bcmrpi3_config"
+BCMRPI3_CONFFILE=$(dirname $0)/../mkkernel/bcmrpi3_config
 
 # For more details see issue https://github.com/raspberrypi/linux/issues/2136
-THERMAL_PATCH_FILE="thermal_patch"
-THERMAL_PATCH_DEST="linux/drivers/thermal/Kconfig"
+THERMAL_PATCH_FILE=$(dirname $0)/../mkkernel/thermal_patch
+THERMAL_PATCH_DEST=$BUILD_PATH/linux/drivers/thermal/Kconfig
