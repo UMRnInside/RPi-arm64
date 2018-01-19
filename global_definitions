@@ -7,10 +7,17 @@ CROSS_COMPILE=${CROSS_COMPILE=aarch64-linux-gnu-}
 
 BUILD_PATH=${BUILD_PATH=$(dirname $0)/../build}
 DIST_PATH=${DIST_PATH=$(dirname $0)/../dist}
-INSTALL_PATH=$BUILD_PATH/
 
-INSTALL_MOD_PATH=$BUILD_PATH/
-INSTALL_HDR_PATH=$BUILD_PATH/usr/
+# Wrapped for Unix-style Makefile in linux
+# Now you are at $BUILD_PATH/linux
+INSTALL_PATH=../kernel_dist
+INSTALL_MOD_PATH=../kernel_dist
+INSTALL_HDR_PATH=../kernel_dist/usr/
+
+# The ralative path
+KERNEL_DIST_PATH=$BUILD_PATH/kernel_dist
+
+CHECKOUT_DEST=${CHECKOUT_DEST="rpi-4.12.y"}
 
 FETCH_METHOD=${FETCH_METHOD="git"}
 GIT_PROTOCOL="git://"
@@ -65,8 +72,8 @@ FW_BOOT=${FW_BOOTCODE}${FW_START}${FW_FIXUP}${FW_LICENSE}
 # For more details see
 # bcm2835-v4l2: https://github.com/raspberrypi/linux/issues/2117
 # MMC issue: https://github.com/raspberrypi/linux/issues/2124
-BCMRPI3_CONFFILE=$(dirname $0)/../mkkernel/bcmrpi3_config
+BCMRPI3_CONFFILE=$(dirname $0)/../stage1/bcmrpi3_config
 
 # For more details see issue https://github.com/raspberrypi/linux/issues/2136
-THERMAL_PATCH_FILE=$(dirname $0)/../mkkernel/thermal_patch
+THERMAL_PATCH_FILE=$(dirname $0)/../stage1/thermal_patch
 THERMAL_PATCH_DEST=$BUILD_PATH/linux/drivers/thermal/Kconfig

@@ -3,11 +3,9 @@
 . $(dirname $0)/../global_definitions
 
 mkdir -p $BUILD_PATH
-mkdir -p $INSTALL_PATH
 
 pushd $BUILD_PATH
 
-CHECKOUT_DEST="rpi-4.12.y"
 if [ ! $SKIP_KERNELFETCH ]; then
     if [ $FETCH_METHOD == "git" ]; then
         echo "Fetching kernel using git clone, target $CHECKOUT_DEST ..."
@@ -22,6 +20,8 @@ else
     echo "Skipping kernel fetch, as SKIP_KERNELFETCH is set"
 fi
 
+popd
+
 # Prepare for building
 
 echo "Patching $THERMAL_PATCH_DEST"
@@ -30,5 +30,3 @@ patch $THERMAL_PATCH_DEST $THERMAL_PATCH_FILE
 
 echo "Copying config..."
 cp $BCMRPI3_CONFFILE $BUILD_PATH/linux/.config
-
-popd

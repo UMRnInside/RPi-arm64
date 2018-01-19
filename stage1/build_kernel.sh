@@ -17,6 +17,7 @@ make modules
 echo "Making dtbs..."
 make dtbs
 
+mkdir -p $INSTALL_PATH
 echo "Exporting to $INSTALL_PATH..."
 make install
 make modules_install
@@ -30,12 +31,13 @@ if [ ! -e $INSTALL_HDR_PATH ]; then
 fi
 
 # After-compilation mods
-popd
 pushd $INSTALL_PATH
 rm -v *.old
 cp -v vmlinuz* kernel8.img
 cp -v $( find dtbs | grep -E 'bcm(.*)rpi' ) .
 cp -a $( find dtbs | grep -E 'overlays$' ) .
-popd
 
+# 2 pushd ran
+popd
+popd
 echo "Done, kernel is ready in $INSTALL_PATH"
