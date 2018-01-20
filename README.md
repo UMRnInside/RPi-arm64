@@ -5,6 +5,7 @@ Currently supported:
 
 * **Stage 1:** Prepare and build kernel
 * **Stage 2:** Build rootfs using _debootstrap_
+* **Stage 3:** Install bootcode and Raspberry Pi userland
 
 ## Stage 1
 ```
@@ -116,3 +117,38 @@ Specify the suite to be installed, depend on `debootstrap` [Default stable]
 Include certain packets. [Default ""]
 
     sudo DEB_INCLUDE=vim,wpasupplicant,hostapd,udhcpd ./stage2/root_debootstrap.sh
+
+## Stage 3
+```
+./stage3/bootcode_install.sh
+./stage3/kernel_install.sh
+```
+### Requirements:
+* Proper `BOOT_PATH` and `ROOT_PATH` on every script, the default value is OK.
+
+### Options:
+#### `FETCH_METHOD`
+The same as `./stage1/prepare_kernel.sh`
+
+Bootcode from [Hexxeh/rpi-firmware](https://github.com/Hexxeh/rpi-firmware)
+
+#### `ROOT_PATH` and `BOOT_PATH`
+Specify root path and boot path.
+
+    sudo BOOT_PATH=/media/boot ./stage3/kernel_install.sh
+    sudo BOOT_PATH=/media/boot ROOT_PATH=/media/root ./stage3/bootcode_install.sh
+
+#### `INSTALL_VC`
+Set to 0 if you do not need VideoCore libraries in `/opt/vc`
+
+    sudo BOOT_PATH=/media/boot ROOT_PATH=/media/root INSTALL_VC=1 ./stage3/bootcode_install.sh
+
+#### `FPTYPE`
+Alternatives:
+
+* `hardfp` (**Default**)
+    Require **armhf** support, suggest: `./stage2/enable_armhf.sh`
+* `softfp`
+     Require **armel** support, suggest: `./stage2/enable_armel.sh`
+
+    sudo FPTYPE=hardfp ./stage3/bootcode_install.sh
