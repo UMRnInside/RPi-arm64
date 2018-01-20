@@ -7,8 +7,10 @@ Currently supported:
 * **Stage 2:** Build rootfs using _debootstrap_
 
 ## Stage 1
-`./stage1/prepare_kernel.sh`
-`./stage1/build_kernel.sh`
+```
+./stage1/prepare_kernel.sh
+./stage1/build_kernel.sh
+```
 
 ### Requirements
 * Utils like
@@ -23,10 +25,12 @@ Currently supported:
 Specify way to fetch kernel source code [Default git]
 
 Alternatives (**Case SENSITIVE**):
+
 * git
 * wget
 
     FETCH_METHOD=wget ./stage1/prepare_kernel.sh
+
 #### `ARCH`
 Select specified ARCH to build [Default arm64]
 
@@ -34,14 +38,14 @@ Select specified ARCH to build [Default arm64]
 #### `CROSS_COMPILE`
 Specify toolchain to use [Default aarch64-linux-gnu- ]
 
-    CROSS_COMPILE=aarcch64-linux-gnu- ./build.sh
+    CROSS_COMPILE=aarcch64-linux-gnu- ./stage1/build_kernel.sh
 #### `JOBCOUNT`
 Passed to `make -j ` [Default $(nproc)]
 
     JOBCOUNT=4 ./stage1/build_kernel.sh
 
 #### `BUILD_PATH`
-Specify place to put the kerneli [Default $(pwd)/build ]
+Specify place to put the kerneli [Default build ]
 
     BUILD_PATH=./build ./stage1/build_kernel.sh
 #### `SKIP_KERNELFETCH`
@@ -57,11 +61,30 @@ Skip kernel fetch.
  * [Issue 2136](https://github.com/raspberrypi/linux/issues/2136)
 
 ## Make rootfs
-Run `./stage2/root_debootstrap.sh`
+```
+# Suppose you are root
+# MUST run first
+./stage2/root_debootstrap.sh
+
+# Install kernel
+./stage2/install_kernel.sh
+
+# Package firmware-brcm80211 is NON-FREE
+./stage2/enable_nonfree.sh
+./stage2/install_firmware_apt.sh
+
+# Optional
+# They allow you to run dynamically linked armhf/armel binaries
+# Uncomment the folling lines to enable them
+#./stage2/enable_armhf.sh
+#./stage2/enable_armel.sh
+
+```
 
 ### Requirements
 * Running as root, for example,
     * `sudo ./stage2/root_debootstrap.sh`
+    * `su`
 * `debootstrap`
 * `chroot`
 * Running on ARM64 platform, or `qemu-aarch64-static` avalable in `PATH`
@@ -71,23 +94,25 @@ Run `./stage2/root_debootstrap.sh`
 Specify where to make rootfs.
 It can be manually moved to other places [Default ./dist/rootfs/]
 
+**NOTE:** You should specify it in the whole stage
+
     sudo ROOT_PATH=./dist/rootfs ./stage2/root_debootstrap.sh
+
 #### `MIRROR`
 Specify mirror site to use [Default http://httpredir.debian.org/debian/]
 
-    sudo MIRROR=https://mirrors.ustc.edu.cn/debian/ ./stage2/root_debootstrap.sh
+**NOTE:** `enable_nonfree.sh` will **OVERWRITE sources.list** in `$ROOT_PATH`
+
+    sudo MIRROR="https://mirrors.ustc.edu.cn/debian/" ./stage2/root_debootstrap.sh
+    sudo MIRROR="https://mirrors.ustc.edu.cn/debian/" ./stage2/enable_nonfree.sh
 
 #### `SUITE`
 Specify the suite to be installed, depend on `debootstrap` [Default stable]
 
     sudo SUITE=stable ./stage2/root_debootstrap.sh
+    sudo SUITE=stable ./stage2/enable_nonfree.sh
 
 #### `DEB_INCLUDE`
 Include certain packets. [Default ""]
 
     sudo DEB_INCLUDE=vim,wpasupplicant,hostapd,udhcpd ./stage2/root_debootstrap.sh
-
-#### `ARMHF_SUPPORT` and `ARMEL_SUPPORT`
-Allow you to run dynamically linked armhf/armel binaries. [Default 0]
-
-    sudo ARMHF_SUPPORT=1 ./stage2/root_debootstrap.sh

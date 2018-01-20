@@ -19,7 +19,7 @@ KERNEL_DIST_PATH=$BUILD_PATH/kernel_dist
 
 CHECKOUT_DEST=${CHECKOUT_DEST="rpi-4.12.y"}
 
-FETCH_METHOD=${FETCH_METHOD="git"}
+FETCH_METHOD=${FETCH_METHOD="wget"}
 GIT_PROTOCOL="git://"
 
 GIT_COMMAND="clone"
@@ -28,7 +28,10 @@ GITCLONE_ARGS=""
 # Debootstrap Variables
 
 ROOT_PATH=${ROOT_PATH=$DIST_PATH/rootfs/}
+BOOT_PATH=${BOOT_PATH=$DIST_PATH/boot/}
 mkdir -p $ROOT_PATH
+mkdir -p $BOOT_PATH
+
 SUITE=${SUITE="stable"}
 DEB_ARCH=${ARCH-arm64}
 MIRROR=${MIRROR="http://httpredir.debian.org/debian/"}
@@ -53,7 +56,7 @@ LIBC_ARMEL=libc6:armel
 # rpi-firmware related
 FW_BOOTCODE="bootcode.bin "
 FW_START="start.elf start_x.elf start_cd.elf start_db.elf "
-FW_FIXUP="fixup.elf fixup_x.elf fixup_cd.elf fixup_db.elf "
+FW_FIXUP="fixup.dat fixup_x.dat fixup_cd.dat fixup_db.dat "
 FW_LICENSE="COPYING.linux LICENCE.broadcom "
 
 FW_BOOT=${FW_BOOTCODE}${FW_START}${FW_FIXUP}${FW_LICENSE}
