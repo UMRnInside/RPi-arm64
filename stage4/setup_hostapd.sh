@@ -11,7 +11,7 @@ PSK=${PSK-$RANDOM_PSK}
 IFACE=${IFACE-wlan0}
 # udhcpd
 IPADDR=${IPADDR-"172.16.233.1"}
-NETMASK=24
+NETMASK=255.255.255.0
 
 IPADDR_PUB=$(echo $IPADDR | cut -d '.' -f 1,2,3)
 
@@ -68,3 +68,17 @@ ht_capab=[HT40][SHORT-GI-20][DSSS_CCK-40]
 
 EOF
 ) > $ROOT_PATH/etc/hostapd.conf
+
+echo "Generating /etc/network/interfaces.d/$IFACE"
+
+(
+cat << EOF
+allow-hotplug $IFACE
+iface $IFACE inet static
+    address $IPADDR
+    netmask $NETMASK
+    post-up hostapd -B /etc/hostapd/hostapd.conf & /etc/init.d/udhcpd restart
+    pre-down pkill hostapd
+
+EOF
+) > $ROOT_PATH/etc/network/interfaces.d/$IFACE
