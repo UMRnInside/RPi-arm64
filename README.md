@@ -72,7 +72,7 @@ Skip kernel fetch.
 
 # Package firmware-brcm80211 is NON-FREE
 ./stage2/enable_nonfree.sh
-./stage2/install_firmware_apt.sh
+./stage2/install_firmware_brcm.sh
 
 # Optional
 # They allow you to run dynamically linked armhf/armel binaries
@@ -149,6 +149,36 @@ Alternatives:
 * `hardfp` (**Default**)
     Require **armhf** support, suggest: `./stage2/enable_armhf.sh`
 * `softfp`
-     Require **armel** support, suggest: `./stage2/enable_armel.sh`
+    Require **armel** support, suggest: `./stage2/enable_armel.sh`
+
 
     sudo FPTYPE=hardfp ./stage3/bootcode_install.sh
+
+## Stage 4
+```
+./stage4/passwd_root.sh
+./stage4/adduser.sh pi
+./stage4/setup_hostapd.sh
+```
+### Requirements:
+* Proper `BOOT_PATH` and `ROOT_PATH` on every script, the default value is OK.
+* Running as root
+
+### Options:
+#### `IFACE`
+Specify WLAN interface for hostapd.
+`wlan0` would work fine in most cases.
+
+    sudo IFACE=wlan0 ./stage4/setup_hostapd.sh
+
+#### `SSID` and `PSK`
+Specify SSID and PSK for hostapd.
+Random values will be generated.
+
+    sudo SSID=Test PSK=changeme ./stage4/setup_hostapd.sh
+
+#### `IPADDR`
+Specify IP Address interface for hostapd and udhcpd. [Default 172.16.233.1]
+
+    sudo IPADDR=172.16.233.1 ./stage4/setup_hostapd.sh
+
