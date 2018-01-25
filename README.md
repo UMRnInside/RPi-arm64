@@ -24,7 +24,7 @@ Currently supported:
 
 ### Options
 #### `FETCH_METHOD`
-Specify way to fetch kernel source code [Default git]
+Specify way to fetch kernel source code [Default wget]
 
 Alternatives (**Case SENSITIVE**):
 
@@ -47,7 +47,7 @@ Passed to `make -j ` [Default $(nproc)]
     JOBCOUNT=4 ./stage1/build_kernel.sh
 
 #### `BUILD_PATH`
-Specify place to put the kerneli [Default build ]
+Specify place to put the kernel [Default build ]
 
     BUILD_PATH=./build ./stage1/build_kernel.sh
 #### `SKIP_KERNELFETCH`
@@ -56,13 +56,13 @@ Skip kernel fetch.
     SKIP_KERNELFETCH=1 ./stage1/build_kernel.sh
 
 ### Extra info:
-`build_kernel.sh` will apply some fixes, for more details see
+`prepare_kernel.sh` will apply some fixes, for more details see
 
  * [Issue 2117](https://github.com/raspberrypi/linux/issues/2117)
  * [Issue 2124](https://github.com/raspberrypi/linux/issues/2124)
  * [Issue 2136](https://github.com/raspberrypi/linux/issues/2136)
 
-## Make rootfs
+## Stage 2
 ```
 # Suppose you are root
 # MUST run first
@@ -84,9 +84,7 @@ Skip kernel fetch.
 ```
 
 ### Requirements
-* Running as root, for example,
-    * `sudo ./stage2/root_debootstrap.sh`
-    * `su`
+* Running as root
 * `debootstrap`
 * `chroot`
 * Running on ARM64 platform, or `qemu-aarch64-static` avalable in `PATH`
@@ -147,10 +145,8 @@ Set to 0 if you do not need VideoCore libraries in `/opt/vc`
 #### `FPTYPE`
 Alternatives:
 
-* `hardfp` (**Default**)
-    Require **armhf** support, suggest: `./stage2/enable_armhf.sh`
-* `softfp`
-    Require **armel** support, suggest: `./stage2/enable_armel.sh`
+* `hardfp` (**Default**), require **armhf** support
+* `softfp`, require **armel** support
 
 
     sudo FPTYPE=hardfp ./stage3/bootcode_install.sh
@@ -174,12 +170,12 @@ Specify WLAN interface for hostapd.
 
 #### `SSID` and `PSK`
 Specify SSID and PSK for hostapd.
-Random values will be generated.
+Random values will be generated if it's empty.
 
     sudo SSID=Test PSK=changeme ./stage4/setup_hostapd.sh
 
 #### `IPADDR`
-Specify IP Address interface for hostapd and udhcpd. [Default 172.16.233.1]
+Specify IP Address [Default 172.16.233.1]
 
     sudo IPADDR=172.16.233.1 ./stage4/setup_hostapd.sh
 
