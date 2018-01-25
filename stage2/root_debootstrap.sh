@@ -2,13 +2,15 @@
 
 . $(dirname $0)/../global_definitions
 DEB_INCLUDE_INITIAL="busybox,wpasupplicant,vim"
-if [ ! $DEB_INCLUDE ]; then
-    DEB_INCLUDE=${DEB_INCLUDE_INITIAL},${DEB_INCLUDE_EXTRA};
+DEB_INCLUDE=${DEB_INCLUDE_INITIAL},${DEB_INCLUDE};
+
+if [ $DEB_VERBOSE ]; then
+    DEB_ARGS=${extraargs}" --verbose";
 fi
 
-extraargs=""
-if [ $DEB_VERBOSE ]; then
-    extraargs="--verbose";
+if [ ! -e $DEBOOTSTRAP_BIN ]; then
+    echo "ERROR: No debootstrap found!";
+    exit 1;
 fi
 
 # Make dir, stop debootstrap from failing 
@@ -21,12 +23,12 @@ if [ $(uname -m) = "aarch64" ]; then
     echo "It seems that you can run arm64 binaries natively."
     DEB_NATIVE=1;
 elif [ -e $(which qemu-aarch64-static) ]; then
-    DEB_QEMU=1
+    DEB_QEMU=1;
     qemu_path=$(which qemu-aarch64-static)
     echo "Detected available qemu at $qemu_path"
     mkdir -p ${ROOT_PATH}/$(dirname $qemu_path)
     cp -v $qemu_path ${ROOT_PATH}/${qemu_path}
 fi
 
-echo "Running debootstrap..."
-$DEBOOTSTRAP_BIN $extraargs --arch $DEB_ARCH --include $DEB_INCLUDE $SUITE $ROOT_PATH $MIRROR
+echo "Running $DEBOOTSTRAP_BIN..."
+$DEBOOTSTRAP_BIN $DEB_ARGS --arch $DEB_ARCH --include $DEB_INCLUDE $SUITE $ROOT_PATH $MIRROR
