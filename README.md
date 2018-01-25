@@ -6,6 +6,7 @@ Currently supported:
 * **Stage 1:** Prepare and build kernel
 * **Stage 2:** Build rootfs using _debootstrap_
 * **Stage 3:** Install bootcode and Raspberry Pi userland
+* **Stage 4:** Offline operations (like adding users)
 
 ## Stage 1
 ```
