@@ -82,3 +82,7 @@ iface $IFACE inet static
 
 EOF
 ) > $ROOT_PATH/etc/network/interfaces.d/$IFACE
+
+echo "Modifing /etc/default/udhcpd"
+
+sed -i "s/^DHCP_ENABLED/\#DHCP_ENABLED/" $ROOT_PATH/etc/default/udhcpd
