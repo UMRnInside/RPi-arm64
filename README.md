@@ -8,174 +8,44 @@ Currently supported:
 * **Stage 3:** Install bootcode and Raspberry Pi userland
 * **Stage 4:** Offline operations (like adding users)
 
-## Stage 1
+## Simple guide
+Should run as root as `sudo` does not pass env by default.
+
 ```
+# Stage 1
+
 ./stage1/prepare_kernel.sh
 ./stage1/build_kernel.sh
-```
 
-### Requirements
-* Utils like
-    * git
-    * patch
-    * etc...
-* a cross-compile toolchain, like
-    * _aarch64-linux-gnu-_ on Debian by installing `gcc-aarch64-linux-gnu`
+# Stage 2
+# Set MIRROR to your mirror site
+#MIRROR="http://mirrors.ustc.edu.cn/debian/"
 
-### Options
-#### `FETCH_METHOD`
-Specify way to fetch kernel source code [Default wget]
-
-Alternatives (**Case SENSITIVE**):
-
-* git
-* wget
-
-    FETCH_METHOD=wget ./stage1/prepare_kernel.sh
-
-#### `ARCH`
-Select specified ARCH to build [Default arm64]
-
-    ARCH=arm64 ./stage1/build_kernel.sh
-#### `CROSS_COMPILE`
-Specify toolchain to use [Default aarch64-linux-gnu- ]
-
-    CROSS_COMPILE=aarcch64-linux-gnu- ./stage1/build_kernel.sh
-#### `JOBCOUNT`
-Passed to `make -j ` [Default $(nproc)]
-
-    JOBCOUNT=4 ./stage1/build_kernel.sh
-
-#### `BUILD_PATH`
-Specify place to put the kernel [Default build ]
-
-    BUILD_PATH=./build ./stage1/build_kernel.sh
-#### `SKIP_KERNELFETCH`
-Skip kernel fetch.
-
-    SKIP_KERNELFETCH=1 ./stage1/build_kernel.sh
-
-### Extra info:
-`prepare_kernel.sh` will apply some fixes, for more details see
-
- * [Issue 2117](https://github.com/raspberrypi/linux/issues/2117)
- * [Issue 2124](https://github.com/raspberrypi/linux/issues/2124)
- * [Issue 2136](https://github.com/raspberrypi/linux/issues/2136)
-
-## Stage 2
-```
-# Suppose you are root
-# MUST run first
 ./stage2/root_debootstrap.sh
-
-# Install kernel
 ./stage2/install_kernel.sh
+./stage2/enable_openssh.sh
 
-# Package firmware-brcm80211 is NON-FREE
+# Package firmware-brcm80211 is NON-FREE, but MAIN in archive.raspberrypi.org
+# firmware-brcm80211 will be retrived from archive.raspberrypi.org
+# Set FWURL to overwrite it
+#FWURL=http://example.org/firmware-brcm80211_all.deb
+
 ./stage2/enable_nonfree.sh
 ./stage2/install_firmware_brcm.sh
 
 # Optional
-# They allow you to run dynamically linked armhf/armel binaries
-# Uncomment the folling lines to enable them
 #./stage2/enable_armhf.sh
-#./stage2/enable_armel.sh
+#./stage2/enable_armhf.sh
 
-```
-
-### Requirements
-* Running as root
-* `debootstrap`
-* `chroot`
-* Running on ARM64 platform, or `qemu-aarch64-static` avalable in `PATH`
-
-### Options
-#### `ROOT_PATH`
-Specify where to make rootfs.
-It can be manually moved to other places [Default ./dist/rootfs/]
-
-**NOTE:** You should specify it in the whole stage
-
-    sudo ROOT_PATH=./dist/rootfs ./stage2/root_debootstrap.sh
-
-#### `MIRROR`
-Specify mirror site to use [Default http://httpredir.debian.org/debian/]
-
-**NOTE:** `enable_nonfree.sh` will **OVERWRITE sources.list** in `$ROOT_PATH`
-
-    sudo MIRROR="https://mirrors.ustc.edu.cn/debian/" ./stage2/root_debootstrap.sh
-    sudo MIRROR="https://mirrors.ustc.edu.cn/debian/" ./stage2/enable_nonfree.sh
-
-#### `SUITE`
-Specify the suite to be installed, depend on `debootstrap` [Default stable]
-
-    sudo SUITE=stable ./stage2/root_debootstrap.sh
-    sudo SUITE=stable ./stage2/enable_nonfree.sh
-
-#### `DEB_INCLUDE`
-Include certain packets. [Default ""]
-
-    sudo DEB_INCLUDE=vim,wpasupplicant,hostapd,udhcpd ./stage2/root_debootstrap.sh
-
-## Stage 3
-```
+# Stage 3
 ./stage3/bootcode_install.sh
 ./stage3/kernel_install.sh
-```
-### Requirements:
-* Proper `BOOT_PATH` and `ROOT_PATH` on every script, the default value is OK.
 
-### Options:
-#### `FETCH_METHOD`
-The same as `./stage1/prepare_kernel.sh`
-
-Bootcode from [Hexxeh/rpi-firmware](https://github.com/Hexxeh/rpi-firmware)
-
-#### `ROOT_PATH` and `BOOT_PATH`
-Specify root path and boot path.
-
-    sudo BOOT_PATH=/media/boot ./stage3/kernel_install.sh
-    sudo BOOT_PATH=/media/boot ROOT_PATH=/media/root ./stage3/bootcode_install.sh
-
-#### `INSTALL_VC`
-Set to 0 if you do not need VideoCore libraries in `/opt/vc`
-
-    sudo BOOT_PATH=/media/boot ROOT_PATH=/media/root INSTALL_VC=1 ./stage3/bootcode_install.sh
-
-#### `FPTYPE`
-Alternatives:
-
-* `hardfp` (**Default**), require **armhf** support
-* `softfp`, require **armel** support
-
-
-    sudo FPTYPE=hardfp ./stage3/bootcode_install.sh
-
-## Stage 4
-```
+# Stage 4
 ./stage4/passwd_root.sh
 ./stage4/adduser.sh pi
 ./stage4/setup_hostapd.sh
 ```
-### Requirements:
-* Proper `BOOT_PATH` and `ROOT_PATH` on every script, the default value is OK.
-* Running as root
 
-### Options:
-#### `IFACE`
-Specify WLAN interface for hostapd.
-`wlan0` would work fine in most cases.
-
-    sudo IFACE=wlan0 ./stage4/setup_hostapd.sh
-
-#### `SSID` and `PSK`
-Specify SSID and PSK for hostapd.
-Random values will be generated if it's empty.
-
-    sudo SSID=Test PSK=changeme ./stage4/setup_hostapd.sh
-
-#### `IPADDR`
-Specify IP Address [Default 172.16.233.1]
-
-    sudo IPADDR=172.16.233.1 ./stage4/setup_hostapd.sh
-
+## Options
+See `README.md` in every stage
