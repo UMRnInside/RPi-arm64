@@ -45,7 +45,7 @@ Skip kernel fetch.
 
     SKIP_KERNELFETCH=1 ./stage1/build_kernel.sh
 
-### Extra info:
+## Extra info:
 `prepare_kernel.sh` will apply some fixes, for more details see
 
  * [Issue 2117](https://github.com/raspberrypi/linux/issues/2117)
