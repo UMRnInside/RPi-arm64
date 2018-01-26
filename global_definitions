@@ -17,7 +17,7 @@ INSTALL_HDR_PATH=../kernel_dist/usr/
 # The ralative path
 KERNEL_DIST_PATH=$BUILD_PATH/kernel_dist
 
-CHECKOUT_DEST=${CHECKOUT_DEST="rpi-4.12.y"}
+LINUX_BRANCH=${LINUX_BRANCH="rpi-4.12.y"}
 
 FETCH_METHOD=${FETCH_METHOD="wget"}
 GIT_PROTOCOL="git://"
