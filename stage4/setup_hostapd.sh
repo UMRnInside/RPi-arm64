@@ -67,7 +67,7 @@ wmm_enabled=1
 ht_capab=[HT40][SHORT-GI-20][DSSS_CCK-40]
 
 EOF
-) > $ROOT_PATH/etc/hostapd.conf
+) > $ROOT_PATH/etc/hostapd/hostapd.conf
 
 echo "Generating /etc/network/interfaces.d/$IFACE"
 
@@ -85,4 +85,4 @@ EOF
 
 echo "Modifing /etc/default/udhcpd"
 
-sed -i "s/^DHCP_ENABLED/\#DHCP_ENABLED/" $ROOT_PATH/etc/default/udhcpd
+sed -i "s/^DHCPD_ENABLED/\#DHCPD_ENABLED/" $ROOT_PATH/etc/default/udhcpd
