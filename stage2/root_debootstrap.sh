@@ -4,10 +4,6 @@
 DEB_INCLUDE_INITIAL="busybox,wpasupplicant,vim"
 DEB_INCLUDE=${DEB_INCLUDE_INITIAL},${DEB_INCLUDE};
 
-if [ $DEB_VERBOSE ]; then
-    DEB_ARGS=${extraargs}" --verbose";
-fi
-
 if [ ! -e $DEBOOTSTRAP_BIN ]; then
     echo "ERROR: No debootstrap found!";
     exit 1;
