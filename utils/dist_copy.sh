@@ -5,9 +5,9 @@
 function rcopy()
 {
     if [ -e $(which pv) ]; then
-        tar -p -c -C $1 | pv -bt | tar -p -x -C $2
+        tar -p -c -C $1 . | pv -rbt | tar -p -x -C $2
     else
-        tar -p -c -C $1 | tar -p -x -C $2
+        tar -p -c -C $1 . | tar -p -x -C $2
     fi
 }
 
