@@ -24,9 +24,11 @@ popd
 
 # Prepare for building
 
-echo "Patching $THERMAL_PATCH_DEST"
-echo "See https://github.com/raspberrypi/linux/issues/2136 for more infomation"
-patch $THERMAL_PATCH_DEST $THERMAL_PATCH_FILE
+if [ $LINUX_BRANCH = "rpi-4.12.y" ]; then
+    echo "Patching $THERMAL_PATCH_DEST"
+    echo "See https://github.com/raspberrypi/linux/issues/2136 for more infomation"
+    patch $THERMAL_PATCH_DEST $THERMAL_PATCH_FILE
+fi
 
 echo "Copying config..."
 cp $BCMRPI3_CONFFILE $BUILD_PATH/linux/.config
