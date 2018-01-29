@@ -26,8 +26,10 @@ case $FETCH_METHOD in
         ;;
 esac
 
+popd
+
 for fw in $FW_BOOT; do
-    cp rpi-firmware/$fw $BOOT_PATH
+    cp $BUILD_PATH/rpi-firmware/$fw $BOOT_PATH
 done
 
 if [ ${INSTALL_VC-1} -eq 1 ]; then
