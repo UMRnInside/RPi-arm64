@@ -64,4 +64,9 @@ Include certain packets. [Default ""]
 
     sudo DEB_INCLUDE=vim,wpasupplicant,hostapd,udhcpd ./stage2/root_debootstrap.sh
 
+### `SKIP_APTUPDATE`
+Set to 1 if you want to skip first `apt-get update` [Default ""]
+
+    sudo SKIP_APTUPDATE=1 ./stage2/root_debootstrap.sh
+
 
