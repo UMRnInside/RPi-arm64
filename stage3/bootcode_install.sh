@@ -35,5 +35,7 @@ done
 if [ ${INSTALL_VC-1} -eq 1 ]; then
     echo "Installing VideoCore userland(/opt/vc)..."
     echo "Using "${FPTYPE=hardfp}
-    cp -a rpi-firmware/vc/${FPTYPE}/opt/vc $ROOT_PATH/opt/
+    cp -a $BUILD_PATH/rpi-firmware/vc/${FPTYPE}/opt/vc $ROOT_PATH/opt/
 fi
+
+echo "Done."
