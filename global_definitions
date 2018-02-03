@@ -75,3 +75,6 @@ BCMRPI3_CONFFILE=$(dirname $0)/../stage1/bcmrpi3_config
 # For more details see issue https://github.com/raspberrypi/linux/issues/2136
 THERMAL_PATCH_FILE=$(dirname $0)/../stage1/thermal_patch
 THERMAL_PATCH_DEST=$BUILD_PATH/linux/drivers/thermal/Kconfig
+
+# Filesystem type
+FSTYPE=${FSTYPE-btrfs}

@@ -2,7 +2,6 @@
 
 . $(dirname $0)/../global_definitions
 
-FSTYPE=${FSTYPE=f2fs}
 ROOTPART_ID=${ROOTPART_ID=2}
 BLOCKDEV=${BLOCKDEV-$1}
 DESTSIZE=${DESTSIZE-"100%"}

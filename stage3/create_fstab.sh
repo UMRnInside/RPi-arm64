@@ -8,7 +8,7 @@ fi
 
 echo "${BOOT_PART-/dev/mmcblk0p1} /boot   vfat    noauto,noatime  0   0" > $ROOT_PATH/etc/fstab
 
-case ${FSTYPE=f2fs} in
+case $FSTYPE in
     ext4|f2fs)
         echo "${ROOT_PART-/dev/mmcblk0p2} /   $FSTYPE    discard,noatime  0   1" >> $ROOT_PATH/etc/fstab
         ;;

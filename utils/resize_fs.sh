@@ -2,7 +2,6 @@
 
 . $(dirname $0)/../global_definitions
 
-FSTYPE=${FSTYPE=f2fs}
 BLOCKDEV=${BLOCKDEV-$1}
 
 if [ ! -e $BLOCKDEV ]; then

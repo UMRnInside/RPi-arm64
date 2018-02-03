@@ -6,7 +6,6 @@ if [ ! $BOOT_PATH ]; then
     echo "WARNING: BOOT_PATH is not set!";
 fi
 
-FSTYPE=${FSTYPE-f2fs}
 ROOT_PART=${ROOT_PART-/dev/mmcblk0p2}
 cmdline="dwc_otg.lpm_enable=0 console=tty1 root=$ROOT_PART rootfstype=$FSTYPE elevator=deadline fsck.repair=yes rootwait"
 
