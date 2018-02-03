@@ -6,6 +6,11 @@ if [ ! $BOOT_PATH ]; then
     echo "WARNING: BOOT_PATH is not set!";
 fi
 
+if [ ! $CONSISTENT_NETDEV_NAMING -eq 1 ]; then
+    # See https://raspberrypi.stackexchange.com/questions/43560/raspberry-pi-3-eth0-wrongfully-named-enx
+    cmdline_ext="net.ifnames=0 biosdevname=0";
+fi
+
 ROOT_PART=${ROOT_PART-/dev/mmcblk0p2}
 cmdline="dwc_otg.lpm_enable=0 console=tty1 root=$ROOT_PART rootfstype=$FSTYPE elevator=deadline fsck.repair=yes rootwait"
 
@@ -64,6 +69,11 @@ dtparam=audio=on
 # NOOBS Auto-generated Settings:
 #hdmi_force_hotplug=1
 #enable_uart0=1
+
+# 3D Acceleration
+#start_x=1
+#dtoverlay=vc4-kms-v3d
+# Support camera
 #gpu_mem=128
 
 EOF

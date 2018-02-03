@@ -32,4 +32,13 @@ Alternatives:
 
     sudo FPTYPE=hardfp ./stage3/bootcode_install.sh
 
+### `CONSISTENT_NETDEV_NAMING`
+Set to 1 if you want to enable _Consistent Network device naming_.
+It does not affect _wlan0_
+
+e.g. `enxaabbccddee22: renamed from eth0`
+
+See [This page](https://raspberrypi.stackexchange.com/questions/43560/raspberry-pi-3-eth0-wrongfully-named-enx) for more information.
+
+    CONSISTENT_NETDEV_NAMING=0 ./stage3/create_bootconf.sh
 
