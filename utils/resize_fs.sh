@@ -2,17 +2,17 @@
 
 . $(dirname $0)/../global_definitions
 
-BLOCKDEV=${BLOCKDEV-$1}
+RESIZE_TARGET=${RESIZE_TARGET-$1}
 
-if [ ! -e $BLOCKDEV ]; then
-    if [ ! $BLOCKDEV ]; then
-        echo "No BLOCKDEV configured."
+if [ ! -e $RESIZE_TARGET ]; then
+    if [ ! $RESIZE_TARGET ]; then
+        echo "No RESIZE_TARGET configured."
     else
-        echo "$BLOCKDEV not found."
+        echo "$RESIZE_TARGET not found."
     fi
-    echo "You should specify an exist block device as BLOCKDEV"
-    echo "e.g. BLOCKDEV=/dev/hdd2 $0"
-    echo "e.g. $0 /dev/hdd2"
+    echo "You should specify an exist block device or a mounted directory as RESIZE_TARGET"
+    echo "e.g. FSTYPE=f2fs RESIZE_TARGET=/dev/hdd2 $0"
+    echo "e.g. FSTYPE=btrfs $0 /mnt/target_root"
     exit 1
 fi
 
@@ -24,6 +24,9 @@ if [ ! $RESIZER ]; then
         ext2|ext3|ext4)
             RESIZER=$(which resize2fs)
             ;;
+        btrfs)
+            RESIZER=$(which btrfs)
+            RESIZER_ARGS="filesystem resize max"
         *)
             RESIZER=$(which resize.$FSTYPE)
             echo "FSTYPE is $FSTYPE, RESIZER could be $RESIZER"
@@ -37,5 +40,5 @@ fi
 
 
 echo "Resizing filesystem..."
-$RESIZER $BLOCKDEV
+$RESIZER $RESIZER_ARGS $RESIZE_TARGET
 
