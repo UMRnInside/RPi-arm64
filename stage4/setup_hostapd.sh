@@ -22,7 +22,7 @@ echo "PSK will be $PSK"
 
 echo "Installing packages..."
 
-chroot $ROOT_PATH apt-get install hostapd udhcpd
+chroot $ROOT_PATH apt-get install -y hostapd udhcpd
 
 echo "Generating config for udhcpd..."
 
