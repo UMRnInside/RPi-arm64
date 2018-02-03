@@ -6,13 +6,13 @@ if [ ! $BOOT_PATH ]; then
     echo "WARNING: BOOT_PATH is not set!";
 fi
 
-if [ ! $CONSISTENT_NETDEV_NAMING -eq 1 ]; then
+if [ ! ${CONSISTENT_NETDEV_NAMING-0} -eq 1 ]; then
     # See https://raspberrypi.stackexchange.com/questions/43560/raspberry-pi-3-eth0-wrongfully-named-enx
     cmdline_ext="net.ifnames=0 biosdevname=0";
 fi
 
 ROOT_PART=${ROOT_PART-/dev/mmcblk0p2}
-cmdline="dwc_otg.lpm_enable=0 console=tty1 root=$ROOT_PART rootfstype=$FSTYPE elevator=deadline fsck.repair=yes rootwait"
+cmdline="dwc_otg.lpm_enable=0 console=tty1 $cmdline_ext root=$ROOT_PART rootfstype=$FSTYPE elevator=deadline fsck.repair=yes rootwait"
 
 echo "Writing $BOOT_PATH/cmdline.txt"
 echo $cmdline > $BOOT_PATH/cmdline.txt
