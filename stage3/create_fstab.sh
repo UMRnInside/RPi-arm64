@@ -6,7 +6,7 @@ if [ ! $ROOT_PATH ]; then
     echo "WARNING: ROOT_PATH is not set!";
 fi
 
-echo "${BOOT_PART-/dev/mmcblk0p1} /boot   vfat    noauto,noatime  0   0" > $ROOT_PATH/etc/fstab
+echo "${BOOT_PART-/dev/mmcblk0p1} /boot   vfat    noatime  0   0" > $ROOT_PATH/etc/fstab
 
 case $FSTYPE in
     ext4|f2fs)
