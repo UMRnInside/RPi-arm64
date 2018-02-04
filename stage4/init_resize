@@ -1,0 +1,47 @@
+#!/bin/bash
+
+FSTYPE=__FSTYPE_REPLACE__
+RESIZE_TARGET=__RESIZE_TARGET_REPLACE__
+BLKDEV=__BLKDEV_REPLACE__
+REVERT=__REVERT_REPLACE__
+
+if [ ! $RESIZER ]; then
+    case $FSTYPE in
+        f2fs)
+            RESIZER=$(which resize.f2fs)
+            ;;
+        ext2|ext3|ext4)
+            RESIZER=$(which resize2fs)
+            ;;
+        btrfs)
+            RESIZER=$(which btrfs)
+            RESIZER_ARGS="filesystem resize max"
+        *)
+            RESIZER=$(which resize.$FSTYPE)
+            echo "FSTYPE is $FSTYPE, RESIZER could be $RESIZER"
+            ;;
+    esac
+    if [ ! -e $RESIZER ]; then
+        echo "Filesystem resizer for $FSTYPE not found!"
+        exit 1
+    fi
+fi
+
+echo "Resizing partiton..."
+parted -s $BLKDEV -- resize 2 100%
+
+echo "Resizing filesystem..."
+$RESIZER $RESIZER_ARGS $RESIZE_TARGET
+
+echo "Reverting /boot/cmdline.txt changes..."
+if [ ! -e /boot/cmdline.txt ]; then
+    echo "/boot/cmdline.txt not found, mounting /boot..."
+    mount /dev/mmcblk0p1 /boot
+fi
+sed -i "s/$REVERT//g" /boot/cmdline.txt
+
+echo "Syncing to disk..."
+sync
+
+echo "Rebooting in 3 seconds..."
+sleep 3 reboot
