@@ -16,6 +16,7 @@ if [ ! $RESIZER ]; then
         btrfs)
             RESIZER=$(which btrfs)
             RESIZER_ARGS="filesystem resize max"
+            ;;
         *)
             RESIZER=$(which resize.$FSTYPE)
             echo "FSTYPE is $FSTYPE, RESIZER could be $RESIZER"
@@ -38,10 +39,11 @@ if [ ! -e /boot/cmdline.txt ]; then
     echo "/boot/cmdline.txt not found, mounting /boot..."
     mount /dev/mmcblk0p1 /boot
 fi
-sed -i "s/$REVERT//g" /boot/cmdline.txt
+sed -i "s^$REVERT^^g" /boot/cmdline.txt
 
 echo "Syncing to disk..."
 sync
 
 echo "Rebooting in 3 seconds..."
-sleep 3 reboot
+sleep 3
+reboot
