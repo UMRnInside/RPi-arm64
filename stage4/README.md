@@ -26,3 +26,16 @@ Specify IP Address [Default 172.16.233.1]
 
     sudo IPADDR=172.16.233.1 ./stage4/setup_hostapd.sh
 
+### `ROOT_BLKDEV`
+Specify root block device name, **NOT ROOT PARTITION**
+
+e.g. `/dev/mmcblk0`
+
+    sudo ROOT_BLKDEV=/dev/mmcblk0 ./stage4/deploy_init_resizer.sh
+
+### `FSTYPE`
+Specify filesystem type [Default btrfs]
+
+    sudo FSTYPE=btrfs ./stage4/deploy_init_resizer.sh
+
+
