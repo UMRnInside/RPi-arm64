@@ -41,10 +41,10 @@ chroot $ROOT_PATH apt-get install -y parted $aptPackage
 echo "Deploying boot resizer..."
 cp $BOOT_RESIZER $deployed
 
-sed -i "s/$FSTYPE_REPLACE_TOKEN/$FSTYPE/" $deployed
-sed -i "s/$BLKDEV_REPLACE_TOKEN/$ROOT_BLKDEV/" $deployed
-sed -i "s/$RESIZE_TARGET_REPLACE_TOKEN/$resizeTarget" $deployed
-sed -i "s/$REVERT_REPLACE_TOKEN/init=$BOOT_RESIZER_DEPLOYED/" $deployed
+sed -i "s^$FSTYPE_REPLACE_TOKEN^$FSTYPE^g" $deployed
+sed -i "s^$BLKDEV_REPLACE_TOKEN^$ROOT_BLKDEV^g" $deployed
+sed -i "s^$RESIZE_TARGET_REPLACE_TOKEN^$resizeTarget^g" $deployed
+sed -i "s^$REVERT_REPLACE_TOKEN^init=$BOOT_RESIZER_DEPLOYED^g" $deployed
 chmod a+x ${ROOT_PATH}${BOOT_RESIZER_DEPLOYED}
 
 echo "Updating $BOOT_PATH/cmdline.txt"
