@@ -16,6 +16,7 @@ if [ ! $RESIZER ]; then
         btrfs)
             RESIZER=$(which btrfs)
             RESIZER_ARGS="filesystem resize max"
+            mount -o remount,rw $RESIZE_TARGET
             ;;
         *)
             RESIZER=$(which resize.$FSTYPE)
@@ -29,7 +30,10 @@ if [ ! $RESIZER ]; then
 fi
 
 echo "Resizing partiton..."
-parted -s $BLKDEV -- resize 2 100%
+parted -s $BLKDEV -- resizepart 2 100%
+
+echo "Informing kernel..."
+partprobe $BLKDEV
 
 echo "Resizing filesystem..."
 $RESIZER $RESIZER_ARGS $RESIZE_TARGET
@@ -46,4 +50,8 @@ sync
 
 echo "Rebooting in 3 seconds..."
 sleep 3
-reboot
+
+# reboot command not rquired, Running as PID 1
+echo "Sending sysrq b..."
+mount -t proc proc /proc
+echo b > /proc/sysrq-trigger
