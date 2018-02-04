@@ -6,11 +6,7 @@ ROOT_BLKDEV=${ROOT_BLKDEV-/dev/mmcblk0}
 BOOT_RESIZER=$(dirname $0)/../stage4/init_resize
 BOOT_RESIZER_DEPLOYED=/usr/local/sbin/init_resize
 
-
 FSTYPE_REPLACE_TOKEN="__FSTYPE_REPLACE__"
-BLKDEV_REPLACE_TOKEN="__BLKDEV_REPLACE__"
-RESIZE_TARGET_REPLACE_TOKEN="__RESIZE_TARGET_REPLACE__"
-REVERT_REPLACE_TOKEN="__REVERT_REPLACE__"
 
 deployed=${ROOT_PATH}${BOOT_RESIZER_DEPLOYED}
 
@@ -36,15 +32,13 @@ case $FSTYPE in
 esac
 
 echo "Installing packages via APT..."
-chroot $ROOT_PATH apt-get install -y parted $aptPackage
+# util-linux: findmnt
+chroot $ROOT_PATH apt-get install -y parted util-linux $aptPackage
 
 echo "Deploying boot resizer..."
 cp $BOOT_RESIZER $deployed
 
 sed -i "s^$FSTYPE_REPLACE_TOKEN^$FSTYPE^g" $deployed
-sed -i "s^$BLKDEV_REPLACE_TOKEN^$ROOT_BLKDEV^g" $deployed
-sed -i "s^$RESIZE_TARGET_REPLACE_TOKEN^$resizeTarget^g" $deployed
-sed -i "s^$REVERT_REPLACE_TOKEN^init=$BOOT_RESIZER_DEPLOYED^g" $deployed
 chmod a+x ${ROOT_PATH}${BOOT_RESIZER_DEPLOYED}
 
 echo "Updating $BOOT_PATH/cmdline.txt"
