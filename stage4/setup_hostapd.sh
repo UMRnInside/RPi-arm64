@@ -37,6 +37,7 @@ start   ${IPADDR_PUB}.20
 end     ${IPADDR_PUB}.250
 
 opt router $IPADDR
+opt subnet $NETMASK
 opt dns 8.8.8.8
 
 EOF
