@@ -2,7 +2,7 @@
 
 . $(dirname $0)/../global_definitions
 
-FIRMWARE="firmware-atheros firmware-iwlwifi firmware-realtek "
+FIRMWARE="firmware-atheros firmware-realtek "
 
 echo "Installing firmwares..."
 echo "Attempt to install the following firmwares:"
