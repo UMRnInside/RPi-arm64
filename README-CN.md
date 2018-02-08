@@ -1,20 +1,24 @@
 # RPi-arm64
-Scripts, configs and hacks to make a ARM64 system for Raspberry Pi 3
+为树莓派3构建基于Debian ARM64 的操作系统。
 
-Currently supported:
+目前支持:
 
-* **Stage 1:** Prepare and build kernel
-* **Stage 2:** Build rootfs using _debootstrap_ , making system **chrootable**
-* **Stage 3:** Install bootcode and Raspberry Pi userland, making system **bootable**
-* **Stage 4:** Offline operations (like adding users)
+* **Stage 1:** 下载、准备、编译内核
+* **Stage 2:** 使用 _debootstrap_ 构建根文件系统
+* **Stage 3:** 安装bootcode和VideoCore libs
+* **Stage 4:** 离线操作 (例如添加用户)
 
-[中文版向导](https://github.com/UMRnInside/RPi-arm64/blob/master/README-CN.md)
+************
+广告:
+树莓派64位系统交流群(QQ):697381661
+
+预构建版本：[百度云](http://pan.baidu.com/s/1hsZVl1i)
 
 ## Simple guide
-Should run as root as `sudo` does not pass env by default.
+请以Root用户执行。
 
 ```
-# If you want to generate an image file
+# 用于构建镜像
 ./utils/dist_partimage.sh
 
 LOOPDEV=$(losetup -f)
@@ -32,22 +36,22 @@ mount ${LOOPDEV}p2 ./dist/rootfs
 ./stage1/build_kernel.sh
 
 # Stage 2
-# Optional: Set MIRROR to your mirror site
+# 可选：设置MIRROR为您使用的镜像站点
 #MIRROR="http://mirrors.ustc.edu.cn/debian/"
 
 ./stage2/root_debootstrap.sh
 ./stage2/install_kernel.sh
 ./stage2/enable_openssh.sh
 
-# Package firmware-brcm80211 is NON-FREE, but MAIN in archive.raspberrypi.org
-# firmware-brcm80211 will be retrived from archive.raspberrypi.org
-# Set FWURL to overwrite it
+# firmware-brcm80211是非自由软件包
+# firmware-brcm80211 将从 archive.raspberrypi.org获取
+# 设置FWURL以改变这个软件包的来源
 #FWURL=http://example.org/firmware-brcm80211_all.deb
 
 ./stage2/enable_nonfree.sh
 ./stage2/install_firmware_brcm.sh
 
-# Optional
+# 可选：支持armhf/armel
 #./stage2/enable_armhf.sh
 #./stage2/enable_armel.sh
 
@@ -62,11 +66,11 @@ mount ${LOOPDEV}p2 ./dist/rootfs
 ./stage4/passwd_root.sh
 ./stage4/adduser.sh pi
 
-# If you want a hotspot
+# 如果您需要热点
 ./stage4/setup_hostapd.sh
-# If you want ethernet access
+# 如果您需要以太网访问
 ./stage4/interface_dhcp.sh
-# If you are building an image
+# 如果您在构建镜像，您可能需要部署文件系统自动扩展程序
 ./stage4/deploy_init_resizer.sh
 ```
 
