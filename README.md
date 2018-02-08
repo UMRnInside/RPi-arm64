@@ -4,21 +4,33 @@ Scripts, configs and hacks to make a ARM64 system for Raspberry Pi 3
 Currently supported:
 
 * **Stage 1:** Prepare and build kernel
-* **Stage 2:** Build rootfs using _debootstrap_
-* **Stage 3:** Install bootcode and Raspberry Pi userland
+* **Stage 2:** Build rootfs using _debootstrap_ , making system **chrootable**
+* **Stage 3:** Install bootcode and Raspberry Pi userland, making system **bootable**
 * **Stage 4:** Offline operations (like adding users)
 
 ## Simple guide
 Should run as root as `sudo` does not pass env by default.
 
 ```
+# If you want to generate an image file
+./utils/dist_partimage.sh
+
+LOOPDEV=$(losetup -f)
+losetup $LOOPDEV RPi-arm64-dist.img
+partprobe $LOOPDEV
+mkfs.vfat -n BOOT ${LOOPDEV}p1
+mkfs.btrfs -L ROOTFS ${LOOPDEV}p2
+
+mount ${LOOPDEV}p1 ./dist/boot
+mount ${LOOPDEV}p2 ./dist/rootfs
+
 # Stage 1
 
 ./stage1/prepare_kernel.sh
 ./stage1/build_kernel.sh
 
 # Stage 2
-# Set MIRROR to your mirror site
+# Optional: Set MIRROR to your mirror site
 #MIRROR="http://mirrors.ustc.edu.cn/debian/"
 
 ./stage2/root_debootstrap.sh
@@ -35,16 +47,25 @@ Should run as root as `sudo` does not pass env by default.
 
 # Optional
 #./stage2/enable_armhf.sh
-#./stage2/enable_armhf.sh
+#./stage2/enable_armel.sh
 
 # Stage 3
 ./stage3/bootcode_install.sh
 ./stage3/kernel_install.sh
+./stage3/create_bootconf.sh
+./stage3/create_fstab.sh
 
 # Stage 4
+# Set root password and add new user
 ./stage4/passwd_root.sh
 ./stage4/adduser.sh pi
+
+# If you want a hotspot
 ./stage4/setup_hostapd.sh
+# If you want ethernet access
+./stage4/interface_dhcp.sh
+# If you are building an image
+./stage4/deploy_init_resizer.sh
 ```
 
 ## Options
