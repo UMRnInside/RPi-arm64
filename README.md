@@ -24,7 +24,7 @@ Should run as root as `sudo` does not pass env by default.
 ./utils/dist_partimage.sh
 
 LOOPDEV=$(losetup -f)
-losetup $LOOPDEV RPi-arm64-dist.img
+losetup $LOOPDEV ./dist/RPi-arm64-dist.img
 partprobe $LOOPDEV
 mkfs.vfat -n BOOT ${LOOPDEV}p1
 mkfs.btrfs -L ROOTFS ${LOOPDEV}p2
