@@ -23,6 +23,11 @@ Set to 0 if you do not need VideoCore libraries in `/opt/vc`
 
     sudo BOOT_PATH=/media/boot ROOT_PATH=/media/root INSTALL_VC=1 ./stage3/bootcode_install.sh
 
+### `INSTALL_VC_SDK`
+Set to 0 if you do not need VideoCore SDK and headers
+
+    sudo INSTALL_VC=1 INSTALL_VC_SDK=1 ./stage3/bootcode_install.sh
+
 ### `FPTYPE`
 Alternatives:
 
