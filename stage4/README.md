@@ -38,4 +38,15 @@ Specify filesystem type [Default btrfs]
 
     sudo FSTYPE=btrfs ./stage4/deploy_init_resizer.sh
 
+### `AUTOMODE`
+Set to 1 to automatically add user/change password [Default 0]
+
+    sudo AUTOMODE=1 ./stage4/adduser.sh pi
+    sudo AUTOMODE=1 PASSWORD=raspberry ./stage4/root_passwd.sh 
+
+### `PASSWORD`
+Set password in auto mode.
+
+    sudo AUTOMODE=1 PASSWORD=raspberry ./stage4/adduser.sh pi
+    sudo AUTOMODE=1 PASSWORD=raspberry ./stage4/root_passwd.sh 
 
