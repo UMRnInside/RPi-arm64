@@ -4,6 +4,14 @@ echo "Generating image..."
 ./utils/dist_partimage.sh
 
 LOOPDEV=$(losetup -f)
+if [ "$LOOPDEV" = "" ]; then
+    mknod /dev/loop-control b 10 237
+    mknod /dev/loop0 b 7 0
+    mknod /dev/loop0 b 7 1
+    mknod /dev/loop0 b 7 2
+    LOOPDEV=$(losetup -f)
+fi
+
 losetup $LOOPDEV ./dist/RPi-arm64-dist.img
 partprobe $LOOPDEV
 mkfs.vfat -n BOOT ${LOOPDEV}p1

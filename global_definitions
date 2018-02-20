@@ -38,11 +38,11 @@ MIRROR=${MIRROR="http://httpredir.debian.org/debian/"}
 
 # Detect available debootstrap file
 if [ ! $DEBOOTSTRAP_BIN ]; then 
-    if [ -e $(which cdebootstrap) ]; then
+    if [ $(which cdebootstrap) != "" ]; then
         DEBOOTSTRAP_BIN=$(which cdebootstrap);
-    elif [ -e $(which cdebootstrap-static) ]; then
+    elif [ $(which cdebootstrap-static) != "" ]; then
         DEBOOTSTRAP_BIN=$(which cdebootstrap-static);
-    elif [ -e $(which debootstrap) ]; then
+    elif [ $(which debootstrap) != "" ]; then
         DEBOOTSTRAP_BIN=$(which debootstrap);
     fi
 fi

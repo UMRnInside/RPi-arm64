@@ -6,7 +6,7 @@ RUN apt-get -y update && \
     apt-get -y install \
         git vim parted wget busybox \
         qemu-user-static debootstrap \
-        dosfstools btrfs-progs \
+        dosfstools btrfs-progs make \
     && apt-get -y clean \
     && rm -rf /var/lib/apt/lists/*
 
