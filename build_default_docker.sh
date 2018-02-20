@@ -38,7 +38,7 @@ if [ "$CONTAINER_EXISTS" != "" ]; then
     time $DOCKER run --rm --privileged \
 		--volumes-from="${CONTAINER_NAME}" --name "${CONTAINER_NAME}_cont" \
         rpi_arm64_buildimg \ 
-        bash -o build.log " \
+        bash -o pipefail " \
             dpkg-reconfigure qemu-user-static && \
             busybox mdev -s; \
             cd /RPi-arm64; \
@@ -48,7 +48,7 @@ else
     time $DOCKER run --privileged \
         --name "${CONTAINER_NAME}" \
         rpi_arm64_buildimg \
-        bash -o build.log " \
+        bash -o pipefail " \
             dpkg-reconfigure qemu-user-static && \
             busybox mdev -s; \
             cd /RPi-arm64; \
