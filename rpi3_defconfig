@@ -1,0 +1,57 @@
+#!/bin/bash
+
+# Image file configuration
+IMGFILE="$DIST_PATH/RPi-arm64-dist.img"
+IMGSIZE_MB=${IMGSIZE_MB=1024}
+BOOT_SIZE=${BOOT_SIZE="100MiB"}
+
+# Filesystem type
+# TODO: Test various filesystems
+FSTYPE=btrfs
+ 
+# Stage 1
+# Compilation-related Variables
+ARCH=arm64
+CROSS_COMPILE=aarch64-linux-gnu-
+LINUX_BRANCH="rpi-4.12.y"
+FETCH_METHOD="wget"
+
+# Stage 2: Variables for debootstrap
+ 
+SUITE="stable"
+DEB_ARCH=arm64
+DEB_INCLUDE="" 
+MIRROR="http://httpredir.debian.org/debian/"
+ 
+## Allow you to run 32-bit ARM dynamically linked binaries 
+## Which was done by installing libc6:armhf or libc6:armel
+CONFIG_ARMHF_SUPPORT=1
+CONFIG_ARMEL_SUPPORT=0
+
+# Set to 0 to disable OpenSSH Server
+CONFIG_OPENSSH_SERVER=1
+
+# Package firmware-brcm80211 is NON-FREE, but MAIN in archive.raspberrypi.org
+# firmware-brcm80211 will be retrived from archive.raspberrypi.org
+# Set FWURL to overwrite it
+FWURL=https://archive.raspberrypi.org/debian/pool/main/f/firmware-nonfree/firmware-brcm80211_20161130-3%2Brpi2_all.deb
+
+# Stage 3
+INSTALL_VC=1
+INSTALL_VC_SDK=1
+
+# Stage 4
+NEW_USER=pi
+PASSWORD_USER=raspberry
+
+PASSWORD_ROOT=raspberry
+
+# Wi-Fi hotspot
+# set to 0 to disable Wi-Fi Hotspot
+CONFIG_HOTSPOT=1
+
+SSID="U.M.R-RPi3"
+PSK="raspberry"
+IPADDR="172.16.233.1"
+
+INSTALL_EXTRA_WIRELESS_FIRMWARE=1

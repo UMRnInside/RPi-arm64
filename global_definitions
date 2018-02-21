@@ -48,9 +48,6 @@ if [ ! $DEBOOTSTRAP_BIN ]; then
 fi
 
 # Allow you to run 32-bit ARM dynamically linked binaries 
-# That was done by installing libc6-armhf-cross or libc6-armel-cross
-ARMHF_SUPPORT=${ARMHF_SUPPORT=0}
-ARMEL_SUPPORT=${ARMEL_SUPPORT=0}
 
 LIBC_ARMHF=libc6:armhf
 LIBC_ARMEL=libc6:armel

@@ -14,3 +14,6 @@ dist/*
 
 # build 
 build/*
+
+# User-defined config
+config
