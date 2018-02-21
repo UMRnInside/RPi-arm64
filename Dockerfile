@@ -4,9 +4,11 @@ ENV DEBIAN_FRONTEND noninteractive
 
 RUN apt-get -y update && \
     apt-get -y install \
-        git vim parted wget busybox \
+        wget busybox unzip patch parted \
         qemu-user-static debootstrap \
-        dosfstools btrfs-progs make \
+        dosfstools btrfs-progs \
+        make build-essential bc \
+        gcc-aarch64-linux-gnu g++-aarch64-linux-gnu \
     && apt-get -y clean \
     && rm -rf /var/lib/apt/lists/*
 
