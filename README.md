@@ -17,64 +17,25 @@ Prebuilt version can be found here:
 If you preferred ubuntu built by Ubuntu-Base, see [chainsx/ubuntu64-rpi](https://github.com/chainsx/ubuntu64-rpi)
 
 ## Simple guide
-Should run as root as `sudo` does not pass env by default.
+It is really simple...
 
-```
-# If you want to generate an image file
-./utils/dist_partimage.sh
+1. `./build.sh`
+2. Have a cup of tea of coffee...
 
-LOOPDEV=$(losetup -f)
-losetup $LOOPDEV ./dist/RPi-arm64-dist.img
-partprobe $LOOPDEV
-mkfs.vfat -n BOOT ${LOOPDEV}p1
-mkfs.btrfs -L ROOTFS ${LOOPDEV}p2
+But, if you want to modify some configuations...
 
-mount ${LOOPDEV}p1 ./dist/boot
-mount ${LOOPDEV}p2 ./dist/rootfs
+1. `cp rpi3_defconfig config`
+2. edit `config`
+3. `./build.sh`
+4. Have a cup of tea/coffee/cola...
 
-# Stage 1
+> ご注文は うさぎ ですか？
+> Is the Order a Rabbit?
 
-./stage1/prepare_kernel.sh
-./stage1/build_kernel.sh
-
-# Stage 2
-# Optional: Set MIRROR to your mirror site
-#MIRROR="http://mirrors.ustc.edu.cn/debian/"
-
-./stage2/root_debootstrap.sh
-./stage2/install_kernel.sh
-./stage2/enable_openssh.sh
-
-# Package firmware-brcm80211 is NON-FREE, but MAIN in archive.raspberrypi.org
-# firmware-brcm80211 will be retrived from archive.raspberrypi.org
-# Set FWURL to overwrite it
-#FWURL=http://example.org/firmware-brcm80211_all.deb
-
-./stage2/enable_nonfree.sh
-./stage2/install_firmware_brcm.sh
-
-# Optional
-#./stage2/enable_armhf.sh
-#./stage2/enable_armel.sh
-
-# Stage 3
-./stage3/bootcode_install.sh
-./stage3/kernel_install.sh
-./stage3/create_bootconf.sh
-./stage3/create_fstab.sh
-
-# Stage 4
-# Set root password and add new user
-./stage4/passwd_root.sh
-./stage4/adduser.sh pi
-
-# If you want a hotspot
-./stage4/setup_hostapd.sh
-# If you want ethernet access
-./stage4/interface_dhcp.sh
-# If you are building an image
-./stage4/deploy_init_resizer.sh
-```
+## Docker build
+1. `cp rpi3_defconfig config`
+2. edit `config` on demand
+3. `./build_docker.sh`
 
 ## Options
-See `README.md` in every stage
+See `README.md` in every stage, or read `rpi3_defconfig`
