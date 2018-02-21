@@ -9,7 +9,7 @@ Currently supported:
 * **Stage 4:** Offline operations (like adding users)
 
 ************
-[中文版向导](https://github.com/UMRnInside/RPi-arm64/blob/master/README-CN.md)
+[中文版向导](https://github.com/UMRnInside/RPi-arm64/blob/Docker-compatibility/README-CN.md)
 
 Prebuilt version can be found here: 
 [Baidu Netdisk](https://pan.baidu.com/s/1hsZVl1i)
@@ -30,6 +30,7 @@ But, if you want to modify some configuations...
 4. Have a cup of tea/coffee/cola...
 
 > ご注文は うさぎ ですか？
+
 > Is the Order a Rabbit?
 
 ## Docker build
