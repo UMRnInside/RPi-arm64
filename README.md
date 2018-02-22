@@ -1,5 +1,5 @@
 # RPi-arm64
-Scripts, configs and hacks to make a ARM64 system for Raspberry Pi 3
+Build a Debian-based ARM64 system for Raspberry Pi 3
 
 Currently supported:
 

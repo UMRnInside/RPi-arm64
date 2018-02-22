@@ -1,0 +1,294 @@
++ uptime
+ 09:41:25 up  4:17,  1 user,  load average: 0.22, 0.88, 1.35
++ sysbench --version
+sysbench 0.4.12
++ sysbench --test=cpu --num-threads=1 --max-requests=10000 run
+sysbench 0.4.12:  multi-threaded system evaluation benchmark
+
+Running the test with following options:
+Number of threads: 1
+
+Doing CPU performance benchmark
+
+Threads started!
+Done.
+
+Maximum prime number checked in CPU test: 10000
+
+
+Test execution summary:
+    total time:                          27.9908s
+    total number of events:              10000
+    total time taken by event execution: 27.9811
+    per-request statistics:
+         min:                                  2.57ms
+         avg:                                  2.80ms
+         max:                                  3.26ms
+         approx.  95 percentile:               2.90ms
+
+Threads fairness:
+    events (avg/stddev):           10000.0000/0.00
+    execution time (avg/stddev):   27.9811/0.00
+
++ sysbench --test=cpu --num-threads=4 --max-requests=100000 run
+sysbench 0.4.12:  multi-threaded system evaluation benchmark
+
+Running the test with following options:
+Number of threads: 4
+
+Doing CPU performance benchmark
+
+Threads started!
+Done.
+
+Maximum prime number checked in CPU test: 10000
+
+
+Test execution summary:
+    total time:                          66.2921s
+    total number of events:              100000
+    total time taken by event execution: 265.0795
+    per-request statistics:
+         min:                                  2.54ms
+         avg:                                  2.65ms
+         max:                                 31.57ms
+         approx.  95 percentile:               2.73ms
+
+Threads fairness:
+    events (avg/stddev):           25000.0000/39.36
+    execution time (avg/stddev):   66.2699/0.00
+
++ sysbench --test=cpu --num-threads=8 --max-requests=100000 run
+sysbench 0.4.12:  multi-threaded system evaluation benchmark
+
+Running the test with following options:
+Number of threads: 8
+
+Doing CPU performance benchmark
+
+Threads started!
+Done.
+
+Maximum prime number checked in CPU test: 10000
+
+
+Test execution summary:
+    total time:                          66.5132s
+    total number of events:              100000
+    total time taken by event execution: 531.7950
+    per-request statistics:
+         min:                                  2.51ms
+         avg:                                  5.32ms
+         max:                                 88.34ms
+         approx.  95 percentile:              12.68ms
+
+Threads fairness:
+    events (avg/stddev):           12500.0000/51.08
+    execution time (avg/stddev):   66.4744/0.02
+
++ sysbench --test=memory --memory-block-size=1K --memory-total-size=1G --memory-access-mode=rnd run
+sysbench 0.4.12:  multi-threaded system evaluation benchmark
+
+Running the test with following options:
+Number of threads: 1
+
+Doing memory operations speed test
+Memory block size: 1K
+
+Memory transfer size: 1024M
+
+Memory operations type: write
+Memory scope type: global
+Threads started!
+Done.
+
+Operations performed: 1048576 (429674.57 ops/sec)
+
+1024.00 MB transferred (419.60 MB/sec)
+
+
+Test execution summary:
+    total time:                          2.4404s
+    total number of events:              1048576
+    total time taken by event execution: 1.7957
+    per-request statistics:
+         min:                                  0.00ms
+         avg:                                  0.00ms
+         max:                                  0.18ms
+         approx.  95 percentile:               0.00ms
+
+Threads fairness:
+    events (avg/stddev):           1048576.0000/0.00
+    execution time (avg/stddev):   1.7957/0.00
+
++ sysbench --test=memory --memory-block-size=1K --memory-total-size=1G --memory-access-mode=seq run
+sysbench 0.4.12:  multi-threaded system evaluation benchmark
+
+Running the test with following options:
+Number of threads: 1
+
+Doing memory operations speed test
+Memory block size: 1K
+
+Memory transfer size: 1024M
+
+Memory operations type: write
+Memory scope type: global
+Threads started!
+Done.
+
+Operations performed: 1048576 (319829.92 ops/sec)
+
+1024.00 MB transferred (312.33 MB/sec)
+
+
+Test execution summary:
+    total time:                          3.2785s
+    total number of events:              1048576
+    total time taken by event execution: 2.6271
+    per-request statistics:
+         min:                                  0.00ms
+         avg:                                  0.00ms
+         max:                                  0.15ms
+         approx.  95 percentile:               0.00ms
+
+Threads fairness:
+    events (avg/stddev):           1048576.0000/0.00
+    execution time (avg/stddev):   2.6271/0.00
+
++ sysbench --test=threads --num-threads=1000 --thread-yields=1000 --thread-locks=8 run
+sysbench 0.4.12:  multi-threaded system evaluation benchmark
+
+Running the test with following options:
+Number of threads: 1000
+
+Doing thread subsystem performance test
+Thread yields per test: 1000 Locks used: 8
+Threads started!
+Done.
+
+
+Test execution summary:
+    total time:                          28.8224s
+    total number of events:              10000
+    total time taken by event execution: 27594.2489
+    per-request statistics:
+         min:                                  3.80ms
+         avg:                               2759.42ms
+         max:                               7870.26ms
+         approx.  95 percentile:            4811.02ms
+
+Threads fairness:
+    events (avg/stddev):           10.0000/1.21
+    execution time (avg/stddev):   27.5942/0.70
+
++ sysbench --test=mutex --mutex-num=4096 --mutex-locks=50000 --mutex-loops=10000 run
+sysbench 0.4.12:  multi-threaded system evaluation benchmark
+
+Running the test with following options:
+Number of threads: 1
+
+Doing mutex performance test
+Threads started!
+Done.
+
+
+Test execution summary:
+    total time:                          0.0208s
+    total number of events:              1
+    total time taken by event execution: 0.0201
+    per-request statistics:
+         min:                                 20.12ms
+         avg:                                 20.12ms
+         max:                                 20.12ms
+         approx.  95 percentile:         10000000.00ms
+
+Threads fairness:
+    events (avg/stddev):           1.0000/0.00
+    execution time (avg/stddev):   0.0201/0.00
+
++ sysbench --test=fileio --file-num=2 --file-total-size=64M --file-test-mode=seqrewr run
+sysbench 0.4.12:  multi-threaded system evaluation benchmark
+
+Running the test with following options:
+Number of threads: 1
+
+Extra file open flags: 0
+2 files, 32Mb each
+64Mb total file size
+Block size 16Kb
+Periodic FSYNC enabled, calling fsync() each 100 requests.
+Calling fsync() at the end of test, Enabled.
+Using synchronous I/O mode
+Doing sequential rewrite test
+Threads started!
+Done.
+
+Operations performed:  0 Read, 4096 Write, 2 Other = 4098 Total
+Read 0b  Written 64Mb  Total transferred 64Mb  (3.1019Mb/sec)
+  198.52 Requests/sec executed
+
+Test execution summary:
+    total time:                          20.6328s
+    total number of events:              4096
+    total time taken by event execution: 0.3446
+    per-request statistics:
+         min:                                  0.07ms
+         avg:                                  0.08ms
+         max:                                  0.35ms
+         approx.  95 percentile:               0.12ms
+
+Threads fairness:
+    events (avg/stddev):           4096.0000/0.00
+    execution time (avg/stddev):   0.3446/0.00
+
++ sysbench --test=fileio --file-num=2 --file-total-size=64M --file-test-mode=rndwr run
+sysbench 0.4.12:  multi-threaded system evaluation benchmark
+
+Running the test with following options:
+Number of threads: 1
+
+Extra file open flags: 0
+2 files, 32Mb each
+64Mb total file size
+Block size 16Kb
+Number of random requests for random IO: 10000
+Read/Write ratio for combined random IO test: 1.50
+Periodic FSYNC enabled, calling fsync() each 100 requests.
+Calling fsync() at the end of test, Enabled.
+Using synchronous I/O mode
+Doing random write test
+Threads started!
+Done.
+
+Operations performed:  0 Read, 10000 Write, 200 Other = 10200 Total
+Read 0b  Written 156.25Mb  Total transferred 156.25Mb  (334.98Kb/sec)
+   20.94 Requests/sec executed
+
+Test execution summary:
+    total time:                          477.6450s
+    total number of events:              10000
+    total time taken by event execution: 0.8740
+    per-request statistics:
+         min:                                  0.07ms
+         avg:                                  0.09ms
+         max:                                  0.31ms
+         approx.  95 percentile:               0.12ms
+
+Threads fairness:
+    events (avg/stddev):           10000.0000/0.00
+    execution time (avg/stddev):   0.8740/0.00
+
++ uname -a
+Linux UMR-E 4.12.14-U.M.R_Powered-v8+ #3 SMP PREEMPT Sat Feb 3 14:33:18 HKT 2018 aarch64 GNU/Linux
++ df -Th
+Filesystem     Type      Size  Used Avail Use% Mounted on
+/dev/mmcblk0p2 btrfs      15G  3.7G   11G  26% /
+devtmpfs       devtmpfs  454M     0  454M   0% /dev
+tmpfs          tmpfs     460M     0  460M   0% /dev/shm
+tmpfs          tmpfs     460M   14M  446M   3% /run
+tmpfs          tmpfs     5.0M  4.0K  5.0M   1% /run/lock
+tmpfs          tmpfs     460M     0  460M   0% /sys/fs/cgroup
+tmpfs          tmpfs     460M     0  460M   0% /tmp
+/dev/mmcblk0p1 vfat      120M   27M   94M  22% /boot
+tmpfs          tmpfs      92M     0   92M   0% /run/user/1000
