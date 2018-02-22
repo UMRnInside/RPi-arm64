@@ -42,7 +42,7 @@ if [ "$CONTAINER_EXISTS" != "" ]; then
             dpkg-reconfigure qemu-user-static && \
             busybox mdev -s; \
             cd /RPi-arm64; \
-            ./build.sh"
+            ./build.sh && rm -r build/linux"
 else
     trap "echo 'got Ctrl+C... please wait 5s'; $DOCKER stop -t 5 ${CONTAINER_NAME}" SIGINT SIGTERM
     time $DOCKER run --privileged \
@@ -52,7 +52,7 @@ else
             dpkg-reconfigure qemu-user-static && \
             busybox mdev -s; \
             cd /RPi-arm64; \
-            ./build.sh"
+            ./build.sh && rm -r build/linux"
 fi
 
 echo "copying results from build/"
