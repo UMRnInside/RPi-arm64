@@ -14,7 +14,7 @@
 
 预构建版本：[百度云](http://pan.baidu.com/s/1hsZVl1i)
 
-如果您想要 _原汁原味（？）_ 的_Ubuntu_：[chainsx/ubuntu64-rpi](https://github.com/chainsx/ubuntu64-rpi)
+如果您想要 _原汁原味（？）_ 的 _Ubuntu_ ：[chainsx/ubuntu64-rpi](https://github.com/chainsx/ubuntu64-rpi)
 
 ## 简明指南
 这个是 _真正的简明指南_

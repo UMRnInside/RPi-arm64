@@ -2,8 +2,8 @@
 
 # Image file configuration
 IMGFILE="$DIST_PATH/RPi-arm64-dist.img"
-IMGSIZE_MB=${IMGSIZE_MB=1024}
-BOOT_SIZE=${BOOT_SIZE="100MiB"}
+IMGSIZE_MB=1024
+BOOT_SIZE="100MiB"
 
 # Filesystem type
 # TODO: Test various filesystems
