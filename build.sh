@@ -101,4 +101,11 @@ if [ "$POSTRUN_SCRIPTS" != "" ]; then
     done
 fi
 
+echo "Unmounting..."
+umount dist/boot
+umount dist/rootfs
+
+echo "Detaching $LOOPDEV"
+losetup -d $LOOPDEV
+
 echo "Done."
