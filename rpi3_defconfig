@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Image file configuration
-IMGFILE="$DIST_PATH/RPi-arm64-dist.img"
+IMGFILE="dist/RPi-arm64-dist.img"
 IMGSIZE_MB=1024
 BOOT_SIZE="100MiB"
 

@@ -13,7 +13,6 @@ fi
 # Read config file
 # Comments and empty lines should be removed
 
-. $(dirname $0)/global_definitions
 eval "export "$(cat config | grep . | grep -v -E "^ " | sed "/^#/d" )
 
 echo "Generating image..."
