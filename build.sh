@@ -12,7 +12,9 @@ fi
 
 # Read config file
 # Comments and empty lines should be removed
-eval $(cat config | grep . | grep -v -E "^ " | sed "/^#/d" | sed "s/^/export /")
+
+. $(dirname $0)/global_definitions
+eval "export "$(cat config | grep . | grep -v -E "^ " | sed "/^#/d" )
 
 echo "Generating image..."
 ./utils/dist_partimage.sh
@@ -20,9 +22,9 @@ echo "Generating image..."
 LOOPDEV=$(losetup -f)
 if [ "$LOOPDEV" = "" ]; then
     mknod /dev/loop-control b 10 237
-    mknod /dev/loop0 b 7 0
-    mknod /dev/loop1 b 7 1
-    mknod /dev/loop2 b 7 2
+    for ((i=0;i<8;i++)) do
+        mknod /dev/loop$i b 7 $i
+    done
     LOOPDEV=$(losetup -f)
 fi
 
