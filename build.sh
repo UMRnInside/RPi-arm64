@@ -26,7 +26,7 @@ if [ "$LOOPDEV" = "" ]; then
     LOOPDEV=$(losetup -f)
 fi
 
-losetup $LOOPDEV ./dist/RPi-arm64-dist.img
+losetup $LOOPDEV $IMGFILE
 partprobe $LOOPDEV
 mkfs.vfat -n BOOT ${LOOPDEV}p1
 mkfs.$FSTYPE -L ROOTFS ${LOOPDEV}p2
