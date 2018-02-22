@@ -1,5 +1,15 @@
 #!/bin/bash
 
+# Scripts to run before we actually start building the system
+# NOTE: The images are mounted.
+# Example:
+# PRERUN_SCRIPTS="./yourscript_1 ./yourscript_2"
+PRERUN_SCRIPTS=""
+
+# Scripts to run before we actually finish building the system
+# NOTE: The images are still mounted.
+POSTRUN_SCRIPTS=""
+
 # Image file configuration
 IMGFILE="dist/RPi-arm64-dist.img"
 IMGSIZE_MB=1024
@@ -10,7 +20,11 @@ BOOT_SIZE="100MiB"
 FSTYPE=btrfs
  
 # Stage 1
+# Set to 1 to skip the stage 1.
+# NOTE: You should make your kernel ready in build/kernel_dist
+SKIP_STAGE1=0
 # Compilation-related Variables
+
 ARCH=arm64
 CROSS_COMPILE=aarch64-linux-gnu-
 LINUX_BRANCH="rpi-4.12.y"

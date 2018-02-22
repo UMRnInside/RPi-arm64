@@ -35,10 +35,20 @@ mkfs.$FSTYPE -L ROOTFS ${LOOPDEV}p2
 mount ${LOOPDEV}p1 ./dist/boot
 mount ${LOOPDEV}p2 ./dist/rootfs
 
+if [ "$PRERUN_SCRIPTS" != "" ]; then
+    for i in "$PRERUN_SCRIPTS"; do
+        $i
+    done
+fi
+
 # Stage 1
-echo "Running Stage 1"
-./stage1/prepare_kernel.sh
-./stage1/build_kernel.sh
+if [ $SKIP_STAGE1 -eq 1 ]; then
+    echo "Skipping stage 1..."
+else
+    echo "Running Stage 1"
+    ./stage1/prepare_kernel.sh
+    ./stage1/build_kernel.sh
+fi
 
 # Stage 2
 # Optional: Set MIRROR to your mirror site
@@ -83,6 +93,12 @@ AUTOMODE=1 PASSWORD=$PASSWORD_USER ./stage4/adduser.sh $NEW_USER
 # Extra
 if [ $INSTALL_EXTRA_WIRELESS_FIRMWARE -eq 1 ]; then
     ./utils/install_firmware_wl.sh
+fi
+
+if [ "$POSTRUN_SCRIPTS" != "" ]; then
+    for i in "$POSTRUN_SCRIPTS"; do
+        $i
+    done
 fi
 
 echo "Done."
