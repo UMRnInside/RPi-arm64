@@ -51,6 +51,8 @@ CONFIG_OPENSSH_SERVER=1
 FWURL=https://archive.raspberrypi.org/debian/pool/main/f/firmware-nonfree/firmware-brcm80211_20161130-3%2Brpi2_all.deb
 
 # Stage 3
+USE_PARTUUID=1
+
 INSTALL_VC=1
 INSTALL_VC_SDK=1
 
