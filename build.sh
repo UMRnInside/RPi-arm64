@@ -84,10 +84,10 @@ if [ $USE_PARTUUID -eq 1 ]; then
     IMGID="$(dd if=${IMGFILE} skip=440 bs=1 count=4 2>/dev/null | xxd -e | cut -f 2 -d' ')"
     echo "got common PARTUUID: $IMGID"
 
-    BOOT_PARTUUID="${IMGID}-01"
-    ROOT_PARTUUID="${IMGID}-02"
+    BOOT_PARTUUID="PARTUUID=${IMGID}-01"
+    ROOT_PARTUUID="PARTUUID=${IMGID}-02"
 
-    ROOT_PART=$ROOT_PARTUUID ./stage3/create_bootconf.sh
+    ROOT_PART="$ROOT_PARTUUID" ./stage3/create_bootconf.sh
     ROOT_PART="$ROOT_PARTUUID" BOOT_PART="$BOOT_PARTUUID" ./stage3/create_fstab.sh
 else
     ./stage3/create_bootconf.sh

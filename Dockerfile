@@ -7,7 +7,7 @@ RUN apt-get -y update && \
         wget busybox unzip patch parted \
         qemu-user-static debootstrap \
         dosfstools btrfs-progs \
-        make build-essential bc \
+        make build-essential bc xxd \
         gcc-aarch64-linux-gnu g++-aarch64-linux-gnu \
     && apt-get -y clean \
     && rm -rf /var/lib/apt/lists/*
