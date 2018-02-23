@@ -7,6 +7,7 @@ BOOT_RESIZER=$(dirname $0)/../stage4/init_resize
 BOOT_RESIZER_DEPLOYED=/usr/local/sbin/init_resize
 
 FSTYPE_REPLACE_TOKEN="__FSTYPE_REPLACE__"
+BOOTPART_REPLACE_TOKEN="__BOOTPART_REPLACE__"
 
 deployed=${ROOT_PATH}${BOOT_RESIZER_DEPLOYED}
 
@@ -39,6 +40,8 @@ echo "Deploying boot resizer..."
 cp $BOOT_RESIZER $deployed
 
 sed -i "s^$FSTYPE_REPLACE_TOKEN^$FSTYPE^g" $deployed
+sed -i "s^$BOOTPART_REPLACE_TOKEN^$BOOT_PART^g" $deployed
+
 chmod a+x ${ROOT_PATH}${BOOT_RESIZER_DEPLOYED}
 
 echo "Updating $BOOT_PATH/cmdline.txt"

@@ -84,11 +84,11 @@ if [ $USE_PARTUUID -eq 1 ]; then
     IMGID="$(dd if=${IMGFILE} skip=440 bs=1 count=4 2>/dev/null | xxd -e | cut -f 2 -d' ')"
     echo "got common PARTUUID: $IMGID"
 
-    BOOT_PARTUUID="PARTUUID=${IMGID}-01"
-    ROOT_PARTUUID="PARTUUID=${IMGID}-02"
+    BOOT_PARTUUID="${IMGID}-01"
+    ROOT_PARTUUID="${IMGID}-02"
 
-    ROOT_PART="$ROOT_PARTUUID" ./stage3/create_bootconf.sh
-    ROOT_PART="$ROOT_PARTUUID" BOOT_PART="$BOOT_PARTUUID" ./stage3/create_fstab.sh
+    ROOT_PART="PARTUUID=$ROOT_PARTUUID" ./stage3/create_bootconf.sh
+    ROOT_PART="PARTUUID=$ROOT_PARTUUID" BOOT_PART="$BOOT_PARTUUID" ./stage3/create_fstab.sh
 else
     ./stage3/create_bootconf.sh
     ./stage3/create_fstab.sh
@@ -103,8 +103,9 @@ AUTOMODE=1 PASSWORD=$PASSWORD_USER ./stage4/adduser.sh $NEW_USER
 ./stage4/setup_hostapd.sh
 # If you want ethernet access
 ./stage4/interface_dhcp.sh
+
 # If you are building an image
-./stage4/deploy_init_resizer.sh
+BOOT_PART=${BOOT_PART-"/dev/mmcblk0p1"} ./stage4/deploy_init_resizer.sh
 
 # Extra
 if [ $INSTALL_EXTRA_WIRELESS_FIRMWARE -eq 1 ]; then

@@ -1,6 +1,7 @@
 #!/bin/bash
 
 FSTYPE=__FSTYPE_REPLACE__
+BOOTPART=__BOOTPART_REPLACE__
 REVERT="init="$0
 
 mount -t proc proc /proc
@@ -51,7 +52,7 @@ $RESIZER $RESIZER_ARGS $RESIZE_TARGET
 echo "Reverting /boot/cmdline.txt changes..."
 if [ ! -e /boot/cmdline.txt ]; then
     echo "/boot/cmdline.txt not found, mounting /boot..."
-    mount /dev/mmcblk0p1 /boot
+    mount $BOOTPART /boot
 fi
 sed -i "s^$REVERT^^g" /boot/cmdline.txt
 
