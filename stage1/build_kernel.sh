@@ -10,6 +10,9 @@ pushd $BUILD_PATH/linux
 # Compile!
 echo "Compiling kernel, which might take a LONG while..."
 JOBCOUNT=${JOBCOUNT=$(nproc)}
+
+# make oldconfig using default settings
+yes "" | make oldconfig
 make -j $JOBCOUNT
 
 echo "Compiling modules..."
