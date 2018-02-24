@@ -35,7 +35,7 @@ $DOCKER build -t rpi_arm64_buildimg .
 
 if [ "$CONTAINER_EXISTS" != "" ]; then
     trap "echo 'got Ctrl+C... please wait 5s'; $DOCKER stop -t 5 ${CONTAINER_NAME}_cont" SIGINT SIGTERM
-    time $DOCKER run --rm --privileged \
+    time $DOCKER run -it --rm --privileged \
 		--volumes-from="${CONTAINER_NAME}" --name "${CONTAINER_NAME}_cont" \
         rpi_arm64_buildimg \ 
         bash -o pipefail -c " \
@@ -45,7 +45,7 @@ if [ "$CONTAINER_EXISTS" != "" ]; then
             ./build.sh && rm -r build/linux"
 else
     trap "echo 'got Ctrl+C... please wait 5s'; $DOCKER stop -t 5 ${CONTAINER_NAME}" SIGINT SIGTERM
-    time $DOCKER run --privileged \
+    time $DOCKER run -it --privileged \
         --name "${CONTAINER_NAME}" \
         rpi_arm64_buildimg \
         bash -o pipefail -c " \
