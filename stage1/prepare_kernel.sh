@@ -12,8 +12,14 @@ if [ ! $SKIP_KERNELFETCH ]; then
         git clone $GITCLONE_ARGS ${GIT_PROTOCOL}github.com/raspberrypi/linux -b $LINUX_BRANCH
     elif [ $FETCH_METHOD == "wget" ]; then
         echo "Fetching kernel using wget, target $LINUX_BRANCH ..."
-        wget -O linux-rpi.tar.gz -c https://github.com/raspberrypi/linux/archive/${LINUX_BRANCH}.tar.gz
-        tar -xf linux-rpi.tar.gz
+        incomplete=1
+        while [ $incomplete -ne 0 ]; 
+        do
+            rm linux-rpi.tar.gz
+            wget -O linux-rpi.tar.gz -c https://github.com/raspberrypi/linux/archive/${LINUX_BRANCH}.tar.gz
+            tar -xf linux-rpi.tar.gz
+            incomplete=$?
+        done
         mv linux-${LINUX_BRANCH} linux
     fi
 else
