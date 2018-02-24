@@ -88,7 +88,7 @@ if [ $USE_PARTUUID -eq 1 ]; then
     ROOT_PARTUUID="${IMGID}-02"
 
     ROOT_PART="PARTUUID=$ROOT_PARTUUID" ./stage3/create_bootconf.sh
-    ROOT_PART="PARTUUID=$ROOT_PARTUUID" BOOT_PART="$BOOT_PARTUUID" ./stage3/create_fstab.sh
+    ROOT_PART="PARTUUID=$ROOT_PARTUUID" BOOT_PART="PARTUUID=$BOOT_PARTUUID" ./stage3/create_fstab.sh
 else
     ./stage3/create_bootconf.sh
     ./stage3/create_fstab.sh
