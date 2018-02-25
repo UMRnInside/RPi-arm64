@@ -58,11 +58,6 @@ sed -i "s^$REVERT^^g" /boot/cmdline.txt
 echo "Syncing to disk..."
 sync
 
-echo "Running depmod..."
-mount -o remount,rw /
-depmod -a
-mount -o remount,ro /
-
 echo "Rebooting in 10 seconds..."
 sleep 10
 
