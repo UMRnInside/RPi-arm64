@@ -1,12 +1,12 @@
 #!/bin/bash
 
-FSTYPE=__FSTYPE_REPLACE__
 REVERT="init="$0
 
 mount -t proc proc /proc
 mount -t sysfs sysfs /sys
 
 BLKDEV_ROOTPART=$(findmnt / -o SOURCE -n)
+ROOTPART_SEQ=$(echo $BLKDEV_ROOTPART | grep -o "[0-9]$")
 BLKDEV_ROOTPART_NAME=$(echo $BLKDEV_ROOTPART | cut -d "/" -f 3)
 BLKDEV=/dev/$(find /sys/block/*/ | grep $BLKDEV_ROOTPART_NAME$ | cut -d "/" -f 4)
 
@@ -38,7 +38,7 @@ if [ ! $RESIZER ]; then
 fi
 
 echo "Resizing partiton..."
-parted -s $BLKDEV -- resizepart 2 100%
+parted -s $BLKDEV -- resizepart $ROOTPART_SEQ 100%
 
 echo "Informing kernel..."
 # Make sure we have updated partition info

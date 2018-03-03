@@ -6,8 +6,6 @@ ROOT_BLKDEV=${ROOT_BLKDEV-/dev/mmcblk0}
 BOOT_RESIZER=$(dirname $0)/../stage4/init_resize
 BOOT_RESIZER_DEPLOYED=/usr/local/sbin/init_resize
 
-FSTYPE_REPLACE_TOKEN="__FSTYPE_REPLACE__"
-
 deployed=${ROOT_PATH}${BOOT_RESIZER_DEPLOYED}
 
 cmdline=$(cat $BOOT_PATH/cmdline.txt)
@@ -37,8 +35,6 @@ chroot $ROOT_PATH apt-get install -y parted util-linux $aptPackage
 
 echo "Deploying boot resizer..."
 cp $BOOT_RESIZER $deployed
-
-sed -i "s^$FSTYPE_REPLACE_TOKEN^$FSTYPE^g" $deployed
 
 chmod a+x ${ROOT_PATH}${BOOT_RESIZER_DEPLOYED}
 
