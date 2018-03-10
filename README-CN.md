@@ -1,12 +1,19 @@
 # RPi-arm64
 为树莓派3构建基于Debian ARM64 的操作系统。
 
-目前支持:
+目前拥有的阶段:
 
 * **Stage 1:** 下载、准备、编译内核
 * **Stage 2:** 使用 _debootstrap_ 构建根文件系统
 * **Stage 3:** 安装bootcode和VideoCore libs
 * **Stage 4:** 离线操作 (例如添加用户)
+
+目前支持的特性:
+
+* 板载无线网卡
+* 蓝牙 (需要手动执行`hciattach`)
+* `bcm2835_v4l2`(树莓派摄像头, 需要 4.12+ 内核)
+* RPi.GPIO (使用 UMRnInside/RPi.GPIO )
 
 ************
 广告:
