@@ -1,12 +1,19 @@
 # RPi-arm64
 Build a Debian-based ARM64 system for Raspberry Pi 3
 
-Currently supported:
+Currently supported stages:
 
 * **Stage 1:** Prepare and build kernel (Using rpi-4.12.y branch by default)
 * **Stage 2:** Build rootfs using _debootstrap_ , making system **chrootable**
 * **Stage 3:** Install bootcode and Raspberry Pi userland, making system **bootable**
 * **Stage 4:** Offline operations (like adding users)
+
+Currently supported features:
+
+* On-board Wi-Fi
+* Bluetooth (But `hciattach` should be run manually)
+* `bcm2835_v4l2`(Camera, requires 4.12+ kernel)
+* RPi.GPIO (Using [UMRnInside/RPi.GPIO](https://github.com/UMRnInside/RPi.GPIO) )
 
 ************
 [中文版向导](https://github.com/UMRnInside/RPi-arm64/blob/Docker-compatibility/README-CN.md)
