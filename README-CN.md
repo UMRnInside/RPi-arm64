@@ -12,8 +12,8 @@
 
 * 板载无线网卡
 * 蓝牙 (需要手动执行`hciattach`)
-* `bcm2835_v4l2`(树莓派摄像头, 需要 4.12+ 内核)
-* RPi.GPIO (使用 UMRnInside/RPi.GPIO )
+* `bcm2835_v4l2`(树莓派摄像头, 需要 4.12 或更高版本的内核)
+* RPi.GPIO (使用 [UMRnInside/RPi.GPIO](https://github.com/UMRnInside/RPi.GPIO) )
 
 ************
 广告:
