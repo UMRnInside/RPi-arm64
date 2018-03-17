@@ -16,7 +16,7 @@ Currently supported features:
 * RPi.GPIO (Using [UMRnInside/RPi.GPIO](https://github.com/UMRnInside/RPi.GPIO) )
 
 ************
-[中文版向导](https://github.com/UMRnInside/RPi-arm64/blob/Docker-compatibility/README-CN.md)
+[中文版向导](README-ZHCN.md)
 
 Prebuilt version can be found here: 
 [Baidu Netdisk](https://pan.baidu.com/s/1hsZVl1i)
