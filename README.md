@@ -26,8 +26,18 @@ If you preferred ubuntu built by Ubuntu-Base, see [chainsx/ubuntu64-rpi](https:/
 ## Simple guide
 It is really simple...
 
-1. `./build.sh`
-2. Have a cup of tea of coffee...
+1. Install dependencies, which goes like this on _Debian/Ubuntu_ :
+```
+apt-get -y install \
+    wget busybox unzip tar patch parted \
+    qemu-user-static debootstrap \
+    dosfstools btrfs-progs \
+    make build-essential bc xxd kmod vim \
+    gcc-aarch64-linux-gnu g++-aarch64-linux-gnu 
+```
+
+2. `./build.sh`
+3. Have a cup of tea of coffee...
 
 But, if you want to modify some configuations...
 

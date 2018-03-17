@@ -26,8 +26,18 @@
 ## 简明指南
 这个是 _真正的简明指南_
 
-1. `./build.sh`
-2. 喝杯茶，不过喝杯咖啡也行
+1. 安装依赖包，在 _Debian/Ubuntu_下：
+```
+apt-get -y install \
+    wget busybox unzip patch parted \
+    qemu-user-static debootstrap \
+    dosfstools btrfs-progs \
+    make build-essential bc xxd kmod vim \
+    gcc-aarch64-linux-gnu g++-aarch64-linux-gnu 
+```
+
+2. `./build.sh`
+3. 喝杯茶，不过喝杯咖啡也行
 
 不过，如果您想手动更改某些设置……
 
