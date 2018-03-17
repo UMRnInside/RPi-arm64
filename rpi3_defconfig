@@ -27,7 +27,7 @@ SKIP_STAGE1=0
 
 ARCH=arm64
 CROSS_COMPILE=aarch64-linux-gnu-
-LINUX_BRANCH="rpi-4.12.y"
+LINUX_BRANCH="rpi-4.14.y"
 FETCH_METHOD="wget"
 
 # Stage 2: Variables for debootstrap

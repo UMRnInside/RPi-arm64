@@ -3,7 +3,7 @@ Build a Debian-based ARM64 system for Raspberry Pi 3
 
 Currently supported stages:
 
-* **Stage 1:** Prepare and build kernel (Using rpi-4.12.y branch by default)
+* **Stage 1:** Prepare and build kernel (Using rpi-4.14.y branch by default)
 * **Stage 2:** Build rootfs using _debootstrap_ , making system **chrootable**
 * **Stage 3:** Install bootcode and Raspberry Pi userland, making system **bootable**
 * **Stage 4:** Offline operations (like adding users)
