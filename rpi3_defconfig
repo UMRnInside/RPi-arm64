@@ -10,6 +10,9 @@ PRERUN_SCRIPTS=""
 # NOTE: The images are still mounted.
 POSTRUN_SCRIPTS=""
 
+# Generate image file, set to 0 to disable
+GENERATE_IMAGE=1
+
 # Image file configuration
 IMGFILE="dist/RPi-arm64-dist.img"
 IMGSIZE_MB=1024

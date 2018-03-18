@@ -15,25 +15,27 @@ fi
 
 eval "export "$(cat config | grep . | grep -v -E "^ " | sed "/^#/d" )
 
-echo "Generating image..."
-./utils/dist_partimage.sh
+if [ $GENERATE_IMAGE -eq 1 ]; then
+    echo "Generating image..."
+    ./utils/dist_partimage.sh
 
-LOOPDEV=$(losetup -f)
-if [ "$LOOPDEV" = "" ]; then
-    mknod /dev/loop-control b 10 237
-    for ((i=0;i<8;i++)) do
-        mknod /dev/loop$i b 7 $i
-    done
     LOOPDEV=$(losetup -f)
+    if [ "$LOOPDEV" = "" ]; then
+        mknod /dev/loop-control b 10 237
+        for ((i=0;i<8;i++)) do
+            mknod /dev/loop$i b 7 $i
+        done
+        LOOPDEV=$(losetup -f)
+    fi
+
+    losetup $LOOPDEV $IMGFILE
+    partprobe $LOOPDEV
+    mkfs.vfat -n BOOT ${LOOPDEV}p1
+    mkfs.$FSTYPE -L ROOTFS ${LOOPDEV}p2
+
+    mount ${LOOPDEV}p1 ./dist/boot
+    mount ${LOOPDEV}p2 ./dist/rootfs
 fi
-
-losetup $LOOPDEV $IMGFILE
-partprobe $LOOPDEV
-mkfs.vfat -n BOOT ${LOOPDEV}p1
-mkfs.$FSTYPE -L ROOTFS ${LOOPDEV}p2
-
-mount ${LOOPDEV}p1 ./dist/boot
-mount ${LOOPDEV}p2 ./dist/rootfs
 
 if [ "$PRERUN_SCRIPTS" != "" ]; then
     for i in "$PRERUN_SCRIPTS"; do
@@ -77,7 +79,7 @@ echo "Running Stage 3"
 ./stage3/bootcode_install.sh
 ./stage3/kernel_install.sh
 
-if [ $USE_PARTUUID -eq 1 ]; then
+if [ $USE_PARTUUID -eq 1 ] && [ $GENERATE_IMAGE -eq 1 ]; then
     echo "Syncing..."
     sync
 
@@ -118,11 +120,13 @@ if [ "$POSTRUN_SCRIPTS" != "" ]; then
     done
 fi
 
-echo "Unmounting..."
-umount dist/boot
-umount dist/rootfs
+if [ $GENERATE_IMAGE -eq 1 ]; then
+    echo "Unmounting..."
+    umount dist/boot
+    umount dist/rootfs
 
-echo "Detaching $LOOPDEV"
-losetup -d $LOOPDEV
+    echo "Detaching $LOOPDEV"
+    losetup -d $LOOPDEV
+fi
 
 echo "Done."
