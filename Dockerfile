@@ -14,6 +14,7 @@ RUN apt-get -y update && \
 
 COPY . /RPi-arm64/
 
-VOLUME [ "/RPi-arm64/build", "/RPi-arm64/dist" ]
+# Never required
+#VOLUME [ "/RPi-arm64/build", "/RPi-arm64/dist" ]
 
 WORKDIR /RPi-arm64

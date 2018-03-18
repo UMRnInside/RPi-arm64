@@ -16,6 +16,7 @@ fi
 
 CONTAINER_NAME=${CONTAINER_NAME-rpi_arm64_work}
 CONTINUE=${CONTINUE-0}
+VOLUME_ARGV="-v $(pwd)/build:/RPi-arm64/build -v $(pwd)/dist:/RPi-arm64/dist"
 
 CONTAINER_EXISTS=$($DOCKER ps -a --filter name="$CONTAINER_NAME" -q)
 CONTAINER_RUNNING=$($DOCKER ps --filter name="$CONTAINER_NAME" -q)
@@ -35,30 +36,25 @@ $DOCKER build -t rpi_arm64_buildimg .
 
 if [ "$CONTAINER_EXISTS" != "" ]; then
     trap "echo 'got Ctrl+C... please wait 5s'; $DOCKER stop -t 5 ${CONTAINER_NAME}_cont" SIGINT SIGTERM
-    time $DOCKER run -it --rm --privileged \
-		--volumes-from="${CONTAINER_NAME}" --name "${CONTAINER_NAME}_cont" \
+    time $DOCKER run -it --rm --privileged $VOLUME_ARGV \
+		--name "${CONTAINER_NAME}_cont" \
         rpi_arm64_buildimg \ 
         bash -o pipefail -c " \
             dpkg-reconfigure qemu-user-static && \
             busybox mdev -s; \
             cd /RPi-arm64; \
-            ./build.sh && rm -r build/linux"
+            ./build.sh "
 else
     trap "echo 'got Ctrl+C... please wait 5s'; $DOCKER stop -t 5 ${CONTAINER_NAME}" SIGINT SIGTERM
-    time $DOCKER run -it --privileged \
+    time $DOCKER run -it --privileged $VOLUME_ARGV \
         --name "${CONTAINER_NAME}" \
         rpi_arm64_buildimg \
         bash -o pipefail -c " \
             dpkg-reconfigure qemu-user-static && \
             busybox mdev -s; \
             cd /RPi-arm64; \
-            ./build.sh && rm -r build/linux"
+            ./build.sh "
 fi
-
-echo "copying results from build/"
-$DOCKER cp "${CONTAINER_NAME}":/RPi-arm64/build .
-echo "copying results from dist/"
-$DOCKER cp "${CONTAINER_NAME}":/RPi-arm64/dist .
 
 echo "Removing container $CONTAINER_NAME ..."
 $DOCKER rm -v $CONTAINER_NAME
