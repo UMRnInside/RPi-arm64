@@ -34,7 +34,16 @@ done
 
 if [ ${INSTALL_VC-1} -eq 1 ]; then
     echo "Installing VideoCore userland(/opt/vc)..."
-    set -e
+    echo "Using "${FPTYPE=hardfp}
+    cp -a $BUILD_PATH/rpi-firmware/vc/${FPTYPE}/opt/vc $ROOT_PATH/opt/
+    if [ ${INSTALL_VC_SDK-1} -eq 1 ]; then
+        echo "Installing VideoCore SDK..."
+        cp -a $BUILD_PATH/rpi-firmware/vc/sdk/opt/vc $ROOT_PATH/opt/
+    fi
+fi
+
+if [ ${INSTALL_VC64:=0} -eq 1 ]; then
+    echo "Installing VideoCore userland(/opt/vc) aarch64 binary..."
     git clone --depth=1 https://github.com/raspberrypi/userland
     rm -rf ./userland/build && mkdir -p ./userland/build
     pushd ./userland/build
@@ -42,12 +51,6 @@ if [ ${INSTALL_VC-1} -eq 1 ]; then
     make -j $(nproc)
     make install DESTDIR=$ROOT_PATH/
     popd
-    set +e
-
-    if [ ${INSTALL_VC_SDK-1} -eq 1 ]; then
-        echo "Installing VideoCore SDK..."
-        cp -a $BUILD_PATH/rpi-firmware/vc/sdk/opt/vc $ROOT_PATH/opt/
-    fi
 fi
 
 echo "Done."
