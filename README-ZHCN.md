@@ -32,7 +32,7 @@ apt-get -y install \
     wget busybox unzip patch parted \
     qemu-user-static debootstrap \
     dosfstools btrfs-progs \
-    make build-essential bc xxd kmod vim \
+    make build-essential bc xxd kmod vim cmake \
     gcc-aarch64-linux-gnu g++-aarch64-linux-gnu 
 ```
 
