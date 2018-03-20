@@ -50,6 +50,12 @@ if [ ${INSTALL_VC64:=0} -eq 1 ]; then
     cmake -DCMAKE_SYSTEM_NAME=Linux -DCMAKE_BUILD_TYPE=release -DARM64=ON -DCMAKE_C_COMPILER=aarch64-linux-gnu-gcc -DCMAKE_CXX_COMPILER=aarch64-linux-gnu-g++ -DCMAKE_ASM_COMPILER=aarch64-linux-gnu-gcc -DVIDEOCORE_BUILD_DIR=/opt/vc ../
     make -j $(nproc)
     make install DESTDIR=$ROOT_PATH/
+
+    for _bin in ${ROOT_PATH}/opt/vc/bin/* ;do
+        _binbase=$(basename $_bin)
+        echo "Symlinking /opt/vc/bin/${_binbase} ..."
+        cd ${ROOT_PATH}/usr/bin/ && ln -sf /opt/vc/bin/${_binbase} ./
+    done
     popd
 fi
 
