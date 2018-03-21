@@ -123,6 +123,9 @@ if [ "$POSTRUN_SCRIPTS" != "" ]; then
     done
 fi
 
+# Cleanup
+./utils/cleanup.sh
+
 if [ $GENERATE_IMAGE -eq 1 ]; then
     echo "Unmounting..."
     umount dist/boot
