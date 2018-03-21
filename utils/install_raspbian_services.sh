@@ -11,6 +11,6 @@ do
   install -m 0644 -v ${_svc} $ROOT_PATH/lib/systemd/system/
   echo "Enable ${_svc_name} ..."
   ( cd $ROOT_PATH/etc/systemd/system/multi-user.target.wants/ && \
-    ln -sf /lib/systemd/system/${_svc}  . )
+    ln -sf /lib/systemd/system/${_svc_name}  . )
 done
 
