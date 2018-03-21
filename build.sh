@@ -113,6 +113,9 @@ BOOT_PART=${BOOT_PART-"/dev/mmcblk0p1"} ./stage4/deploy_init_resizer.sh
 if [ $INSTALL_EXTRA_WIRELESS_FIRMWARE -eq 1 ]; then
     ./utils/install_firmware_wl.sh
 fi
+if [ ${INSTALL_EXTRA_RASPBIAN_SERVICES:=1} -eq 1 ]; then
+    ./utils/install_raspbian_services.sh
+fi
 
 if [ "$POSTRUN_SCRIPTS" != "" ]; then
     for i in "$POSTRUN_SCRIPTS"; do
