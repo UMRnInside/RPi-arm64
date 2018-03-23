@@ -1,4 +1,5 @@
 #!/bin/bash
+# Features borrowed from Raspbian
 
 . $(dirname $0)/../global_definitions
 
@@ -14,3 +15,15 @@ do
     ln -sf /lib/systemd/system/${_svc_name}  . )
 done
 
+
+echo "Setup Hostname and /etc/hosts ..."
+export HOSTNAME=raspberrypi
+chroot $ROOT_PATH  bash -c "echo ${HOSTNAME} > /etc/hostname"
+chroot $ROOT_PATH  bash -c "echo '127.0.1.1 ${HOSTNAME}' >> /etc/hosts"
+
+
+echo "Installing extra packages : "
+echo "  rfkill : WiFI controlling..."
+echo "  avahi-daemon : Aoto Discovery... (default service enabled)"
+echo "  ntpdate : time keeping (when interface UP)"
+chroot $ROOT_PATH apt install -y ntpdate rfkill avahi-daemon dhcpcd5

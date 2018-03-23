@@ -1,7 +1,7 @@
 #!/bin/bash
 
 . $(dirname $0)/../global_definitions
-DEB_INCLUDE_INITIAL="busybox,wpasupplicant,vim,dhcpcd5"
+DEB_INCLUDE_INITIAL="busybox,wpasupplicant,vim"
 DEB_INCLUDE=${DEB_INCLUDE_INITIAL},${DEB_INCLUDE};
 
 if [ ! -e $DEBOOTSTRAP_BIN ]; then
