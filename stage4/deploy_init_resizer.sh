@@ -38,11 +38,15 @@ cp $BOOT_RESIZER $deployed
 
 chmod a+x ${ROOT_PATH}${BOOT_RESIZER_DEPLOYED}
 
-echo "Updating $BOOT_PATH/cmdline.txt"
-if echo $cmdline | grep init=$BOOT_RESIZER_DEPLOYED ; then
-    echo "cmdline.txt already configured."
+if [ ${RESIZEFS_FIRSTBOOT:=1} -eq 1 ]; then
+    echo "Updating $BOOT_PATH/cmdline.txt"
+    if echo $cmdline | grep init=$BOOT_RESIZER_DEPLOYED ; then
+        echo "cmdline.txt already configured."
+    else
+        echo ${cmdline}" init=$BOOT_RESIZER_DEPLOYED" > $BOOT_PATH/cmdline.txt
+    fi
 else
-    echo ${cmdline}" init=$BOOT_RESIZER_DEPLOYED" > $BOOT_PATH/cmdline.txt
+    echo "Skip configure firstboot resizefs option..."
 fi
 
 echo "Done."

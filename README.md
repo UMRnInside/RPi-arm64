@@ -28,11 +28,20 @@ It is really simple...
 
 1. Install dependencies, which goes like this on _Debian/Ubuntu_ :
 ```
+# Debian
 apt-get -y install \
     wget busybox unzip tar patch parted \
     qemu-user-static debootstrap \
     dosfstools btrfs-progs \
-    make build-essential bc xxd kmod vim \
+    make build-essential bc xxd kmod vim cmake \
+    gcc-aarch64-linux-gnu g++-aarch64-linux-gnu 
+
+# Ubuntu (16.04)
+apt-get -y install \
+    wget busybox unzip tar patch parted \
+    qemu-user-static debootstrap \
+    dosfstools btrfs-tools \
+    make build-essential bc kmod vim cmake \
     gcc-aarch64-linux-gnu g++-aarch64-linux-gnu 
 ```
 

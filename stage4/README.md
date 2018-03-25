@@ -33,6 +33,11 @@ e.g. `/dev/mmcblk0`
 
     sudo ROOT_BLKDEV=/dev/mmcblk0 ./stage4/deploy_init_resizer.sh
 
+### `RESIZEFS_FIRSTBOOT`
+Resizes filesystem on first boot [Default 1]
+
+    sudo ROOT_BLKDEV=/dev/mmcblk0 RESIZEFS_FIRSTBOOT=1 ./stage4/deploy_init_resizer.sh
+
 ### `FSTYPE`
 Specify filesystem type [Default btrfs]
 

@@ -36,5 +36,10 @@ if [ $LINUX_BRANCH = "rpi-4.12.y" ]; then
     patch $THERMAL_PATCH_DEST $THERMAL_PATCH_FILE
 fi
 
-echo "Copying config..."
-cp $BCMRPI3_CONFFILE $BUILD_PATH/linux/.config
+if [ ${KERNEL_USE_DEFCONFIG:=0} -eq 1 ];then
+    echo "Kernel config use predefined..."
+    ( cd $BUILD_PATH/linux/ &&  make bcmrpi3_defconfig )
+else
+    echo "Copying config..."
+    cp $BCMRPI3_CONFFILE $BUILD_PATH/linux/.config
+fi
