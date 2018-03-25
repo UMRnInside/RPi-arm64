@@ -17,7 +17,7 @@ done
 
 
 echo "Setup Hostname and /etc/hosts ..."
-export HOSTNAME=raspberrypi
+export HOSTNAME=${HOSTNAME=raspberrypi}
 chroot $ROOT_PATH  bash -c "echo ${HOSTNAME} > /etc/hostname"
 chroot $ROOT_PATH  bash -c "echo '127.0.1.1 ${HOSTNAME}' >> /etc/hosts"
 
@@ -29,5 +29,7 @@ echo "  ntpdate : time keeping (when interface UP)"
 chroot $ROOT_PATH apt install -y ntpdate rfkill avahi-daemon dhcpcd5 sudo usbutils wireless-tools bash-completion net-tools
 
 # User:pi add to sudoers
-echo 'includedir /etc/sudoers.d' >> $ROOT_PATH/etc/sudoers
-echo 'pi ALL=(ALL:ALL) ALL' > $ROOT_PATH/etc/sudoers.d/00_pi
+if [ $CONFIG_SUDO -eq 1 ]; then
+    echo 'includedir /etc/sudoers.d' >> $ROOT_PATH/etc/sudoers
+    echo 'pi ALL=(ALL:ALL) ALL' > $ROOT_PATH/etc/sudoers.d/00_pi
+fi

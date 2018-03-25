@@ -13,6 +13,9 @@ POSTRUN_SCRIPTS=""
 # Generate image file, set to 0 to disable
 GENERATE_IMAGE=1
 
+# Set hostname
+HOSTNAME=raspberrypi
+
 # Image file configuration
 IMGFILE="dist/RPi-arm64-dist.img"
 IMGSIZE_MB=1024
@@ -65,6 +68,9 @@ NEW_USER=pi
 PASSWORD_USER=raspberry
 
 PASSWORD_ROOT=raspberry
+
+# Set to 1 to configure sudo
+CONFIG_SUDO=1
 
 # Wi-Fi hotspot
 # set to 0 to disable Wi-Fi Hotspot
