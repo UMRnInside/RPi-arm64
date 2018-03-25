@@ -102,7 +102,17 @@ AUTOMODE=1 PASSWORD=$PASSWORD_ROOT ./stage4/passwd_root.sh
 AUTOMODE=1 PASSWORD=$PASSWORD_USER ./stage4/adduser.sh $NEW_USER
 
 # If you want a hotspot
-./stage4/setup_hostapd.sh
+if [ ${CONFIG_HOTSPOT} -eq 1 ] ;then
+    ./stage4/setup_hostapd.sh
+else
+    cat <<EOF>/etc/network/interfaces.d/wlan0
+auto wlan0
+iface wlan0 inet dhcp
+wpa-conf /etc/wpa_supplicant/wpa_supplicant.conf
+EOF
+
+fi
+
 # If you want ethernet access
 ./stage4/interface_dhcp.sh
 
@@ -113,12 +123,18 @@ BOOT_PART=${BOOT_PART-"/dev/mmcblk0p1"} ./stage4/deploy_init_resizer.sh
 if [ $INSTALL_EXTRA_WIRELESS_FIRMWARE -eq 1 ]; then
     ./utils/install_firmware_wl.sh
 fi
+if [ ${INSTALL_EXTRA_RASPBIAN_SERVICES:=1} -eq 1 ]; then
+    ./utils/install_raspbian_services.sh
+fi
 
 if [ "$POSTRUN_SCRIPTS" != "" ]; then
     for i in "$POSTRUN_SCRIPTS"; do
         $i
     done
 fi
+
+# Cleanup
+./utils/cleanup.sh
 
 if [ $GENERATE_IMAGE -eq 1 ]; then
     echo "Unmounting..."
