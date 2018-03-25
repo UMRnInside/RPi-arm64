@@ -23,14 +23,23 @@ Specify branch name [Default rpi-4.12.y]
 
     LINUX_BRANCH=rpi-4.12.y ./stage1/prepare_kernel.sh
 
+### `KERNEL_USE_DEFCONFIG`
+Use `bcmrpi3_defconfig` rather than that from this repository.
+
+    KERNEL_USE_DEFCONFIG=0 ./stage1/prepare_kernel.sh
+
 ### `ARCH`
 Select specified ARCH to build [Default arm64]
 
     ARCH=arm64 ./stage1/build_kernel.sh
+
+
 ### `CROSS_COMPILE`
 Specify toolchain to use [Default aarch64-linux-gnu- ]
 
     CROSS_COMPILE=aarcch64-linux-gnu- ./stage1/build_kernel.sh
+
+
 ### `JOBCOUNT`
 Passed to `make -j ` [Default $(nproc)]
 
@@ -40,6 +49,7 @@ Passed to `make -j ` [Default $(nproc)]
 Specify place to put the kernel [Default build ]
 
     BUILD_PATH=./build ./stage1/build_kernel.sh
+
 ### `SKIP_KERNELFETCH`
 Skip kernel fetch.
 

@@ -23,6 +23,13 @@ Set to 0 if you do not need VideoCore libraries in `/opt/vc`
 
     sudo BOOT_PATH=/media/boot ROOT_PATH=/media/root INSTALL_VC=1 ./stage3/bootcode_install.sh
 
+### `INSTALL_VC64`
+Use ARM64 version of VideoCore libraries in `/opt/vc`, this requires `cmake` in host.
+
+NOTE: It BREAKS `INSTALL_VC`
+
+    sudo BOOT_PATH=/media/boot ROOT_PATH=/media/root INSTALL_VC64=1 ./stage3/bootcode_install.sh
+
 ### `INSTALL_VC_SDK`
 Set to 0 if you do not need VideoCore SDK and headers
 
