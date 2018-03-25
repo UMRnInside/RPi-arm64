@@ -102,7 +102,17 @@ AUTOMODE=1 PASSWORD=$PASSWORD_ROOT ./stage4/passwd_root.sh
 AUTOMODE=1 PASSWORD=$PASSWORD_USER ./stage4/adduser.sh $NEW_USER
 
 # If you want a hotspot
-[ ${CONFIG_HOTSPOT} -eq 1 ] && ./stage4/setup_hostapd.sh
+if [ ${CONFIG_HOTSPOT} -eq 1 ] ;then
+    ./stage4/setup_hostapd.sh
+else
+    cat <<EOF>/etc/network/interfaces.d/wlan0
+auto wlan0
+iface wlan0 inet dhcp
+wpa-conf /etc/wpa_supplicant/wpa_supplicant.conf
+EOF
+
+fi
+
 # If you want ethernet access
 ./stage4/interface_dhcp.sh
 
