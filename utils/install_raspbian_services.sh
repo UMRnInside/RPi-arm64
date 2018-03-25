@@ -31,4 +31,5 @@ chroot $ROOT_PATH apt install -y ntpdate rfkill avahi-daemon dhcpcd5 sudo usbuti
 # User:pi add to sudoers
 if [ $CONFIG_SUDO -eq 1 ]; then
     echo 'pi ALL=(ALL:ALL) ALL' > $ROOT_PATH/etc/sudoers.d/00_pi
+    chmod 0440                    $ROOT_PATH/etc/sudoers.d/00_pi
 fi
