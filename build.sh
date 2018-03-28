@@ -105,14 +105,7 @@ AUTOMODE=1 PASSWORD=$PASSWORD_USER ./stage4/adduser.sh $NEW_USER
 if [ ${CONFIG_HOTSPOT} -eq 1 ] ;then
     ./stage4/setup_hostapd.sh
 else
-    (
-    cat << EOF
-auto wlan0
-iface wlan0 inet dhcp
-    wpa-conf /etc/wpa_supplicant/wpa_supplicant.conf
-
-EOF
-    ) > $ROOT_PATH/etc/network/interfaces.d/wlan0
+    ./stage4/setup_wifi.sh
 fi
 
 # If you want ethernet access

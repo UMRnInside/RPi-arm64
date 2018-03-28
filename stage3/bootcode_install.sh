@@ -63,6 +63,7 @@ if [ ${INSTALL_VC64:=0} -eq 1 ]; then
             echo "Symlinked /opt/vc/bin/${_binbase} ..."
         fi
     done
+    echo "/opt/vc/lib/" > ${ROOT_PATH}/etc/ld.so.conf.d/vc-userland.conf
 fi
 
 echo "Done."
