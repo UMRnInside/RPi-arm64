@@ -49,5 +49,17 @@ else
     echo "Skip configure firstboot resizefs option..."
 fi
 
+# workaround for fsck.f2fs missing "-y" option
+#   Bugreport: https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=883026
+#   Solution: upgrade to unstable v1.10
+if [ "$FSTYPE" = "f2fs" ];then
+    for pkg in libf2fs0_1.10.0-1_arm64.deb \
+               f2fs-tools_1.10.0-1_arm64.deb
+    do
+        wget -c -P $ROOT_PATH/ "http://ftp.debian.org/debian/pool/main/f/f2fs-tools/${pkg}"
+        chroot $ROOT_PATH dpkg -i /${pkg}
+    done
+fi
+
 echo "Done."
 
