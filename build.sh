@@ -31,7 +31,11 @@ if [ $GENERATE_IMAGE -eq 1 ]; then
     losetup $LOOPDEV $IMGFILE
     partprobe $LOOPDEV
     mkfs.vfat -n BOOT ${LOOPDEV}p1
-    mkfs.$FSTYPE -L ROOTFS ${LOOPDEV}p2
+    if [ "$FSTYPE" = "f2fs" ];then
+        mkfs.$FSTYPE -l ROOTFS ${LOOPDEV}p2
+    else
+        mkfs.$FSTYPE -L ROOTFS ${LOOPDEV}p2
+    fi
 
     mount ${LOOPDEV}p1 ./dist/boot
     mount ${LOOPDEV}p2 ./dist/rootfs
