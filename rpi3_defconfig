@@ -51,10 +51,10 @@ CONFIG_ARMEL_SUPPORT=0
 # Set to 0 to disable OpenSSH Server
 CONFIG_OPENSSH_SERVER=1
 
-# Package firmware-brcm80211 is NON-FREE, but MAIN in archive.raspberrypi.org
-# firmware-brcm80211 will be retrived from archive.raspberrypi.org
+# Package firmware-brcm80211 is NON-FREE
+# firmware-brcm80211 will be retrived from mirrordirector.raspbian.org
 # Set FWURL to overwrite it
-FWURL=https://archive.raspberrypi.org/debian/pool/main/f/firmware-nonfree/firmware-brcm80211_20161130-3%2Brpi2_all.deb
+FWURL=http://mirrordirector.raspbian.org/raspbian/pool/non-free/f/firmware-nonfree/firmware-brcm80211_20170823-1_all.deb
 
 # Stage 3
 USE_PARTUUID=1
