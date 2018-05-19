@@ -5,6 +5,7 @@ REVERT="init="$0
 mount -t proc proc /proc
 mount -t sysfs sysfs /sys
 
+FSTYPE=$(cat /proc/cmdline |tr ' ' '\n' | awk -F= '/rootfstype/{print $2}')
 BLKDEV_ROOTPART=$(findmnt / -o SOURCE -n)
 ROOTPART_SEQ=$(echo $BLKDEV_ROOTPART | grep -o "[0-9]$")
 BLKDEV_ROOTPART_NAME=$(echo $BLKDEV_ROOTPART | cut -d "/" -f 3)
