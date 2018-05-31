@@ -67,7 +67,7 @@ if [ $CONFIG_OPENSSH_SERVER -eq 1 ]; then
 fi
 
 ./stage2/enable_nonfree.sh
-./stage2/install_firmware_brcm.sh
+./stage2/install_firmware_"$FIRMWARE_SOURCE".sh
 
 # Optional
 if [ $CONFIG_ARMHF_SUPPORT -eq 1 ]; then
