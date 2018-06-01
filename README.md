@@ -1,5 +1,5 @@
 # RPi-arm64
-Build a Debian-based ARM64 system for Raspberry Pi 3
+Build a Debian-based ARM64 system for Raspberry Pi 3 (including 3 B+)
 
 Currently supported stages:
 
