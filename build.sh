@@ -132,6 +132,9 @@ if [ "$POSTRUN_SCRIPTS" != "" ]; then
     done
 fi
 
+# Copy build info
+./utils/copy_build_info.sh
+
 # Cleanup
 ./utils/cleanup.sh
 
