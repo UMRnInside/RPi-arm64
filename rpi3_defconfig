@@ -1,4 +1,7 @@
 #!/bin/bash
+# Configuration of UMRnInside/RPi-arm64
+# See https://github.com/UMRnInside/RPi-arm64
+# It MUST be data. :)
 
 # Scripts to run before we actually start building the system
 # NOTE: The images are mounted.
