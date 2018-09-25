@@ -59,7 +59,7 @@ if [ "$FSTYPE" = "f2fs" ];then
                libf2fs-format4_${F2FS_VERSION}_arm64.deb \
                libf2fs5_${F2FS_VERSION}_arm64.deb
     do
-        wget -c -P $ROOT_PATH/ "http://ftp.debian.org/debian/pool/main/f/f2fs-tools/${pkg}"
+        wget -c -P $ROOT_PATH/ ${MIRROR}"/pool/main/f/f2fs-tools/${pkg}"
         chroot $ROOT_PATH dpkg -i /${pkg}
     done
 fi
