@@ -21,6 +21,9 @@ Currently supported features:
 Prebuilt version can be found here: 
 [Baidu Netdisk](https://pan.baidu.com/s/1hsZVl1i)
 
+f2fs + desktop Prebuilt version can be found here: 
+[Baidu Netdisk](https://pan.baidu.com/s/1W6YMBoly5GfKc3OPWQI_yQ)
+
 If you preferred ubuntu built by Ubuntu-Base, see [chainsx/ubuntu64-rpi](https://github.com/chainsx/ubuntu64-rpi)
 
 ## Simple guide
