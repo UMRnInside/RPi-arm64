@@ -28,6 +28,9 @@
 
 1. 安装依赖包，在 _Debian/Ubuntu_下：
 ```
+# Debian or Ubuntu
+./install_deps.sh
+
 # Debian
 apt-get -y install \
     wget busybox unzip tar patch parted \
@@ -43,6 +46,7 @@ apt-get -y install \
     dosfstools btrfs-tools \
     make build-essential bc kmod vim cmake \
     gcc-aarch64-linux-gnu g++-aarch64-linux-gnu     
+
 ```
 
 2. `./build.sh`
@@ -50,6 +54,7 @@ apt-get -y install \
 
 不过，如果您想手动更改某些设置……
 
+0. 如果需要桌面启动或者偏好f2fs,configExamples里有，可以直接cp到目录中的config
 1. `cp rpi3_defconfig config`
 2. 按需编辑 `config`
 3. `./build.sh`
@@ -60,6 +65,7 @@ apt-get -y install \
 > 请问您今天要来点兔子吗？
 
 ## 使用Docker
+0. 可选直接从configExamples中拷贝
 1. `cp rpi3_defconfig config`
 2. 按需编辑 `config`
 3. `./build_docker.sh`
