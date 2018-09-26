@@ -1,5 +1,6 @@
 #!/bin/bash
 #sudo apt update
+. $(dirname $0)/../global_definitions
 
 #常用工具
 chroot $ROOT_PATH apt install ssh tofrodos wget  htop ncdu lrzsz vim apt-transport-https mousepad -y
