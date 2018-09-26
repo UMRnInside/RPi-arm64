@@ -11,7 +11,7 @@ PRERUN_SCRIPTS=""
 
 # Scripts to run before we actually finish building the system
 # NOTE: The images are still mounted.
-POSTRUN_SCRIPTS="./scriptExamples/postrun_xfce_xrdp.sh"
+POSTRUN_SCRIPTS=""
 
 # Generate image file, set to 0 to disable
 GENERATE_IMAGE=1
@@ -89,5 +89,6 @@ PSK="raspberry"
 IPADDR="172.16.233.1"
 
 INSTALL_EXTRA_WIRELESS_FIRMWARE=1
-
+INSTALL_EXTRA_RASPBIAN_SERVICES=1
+INSTALL_XFCE_XRDP=1
 RESIZEFS_FIRSTBOOT=1

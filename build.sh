@@ -125,6 +125,9 @@ fi
 if [ ${INSTALL_EXTRA_RASPBIAN_SERVICES:=1} -eq 1 ]; then
     ./utils/install_raspbian_services.sh
 fi
+if [ ${INSTALL_XFCE_XRDP:=1} -eq 1 ]; then
+    ./utils/install_xfce_xrdp.sh
+fi
 
 if [ "$POSTRUN_SCRIPTS" != "" ]; then
     for i in "$POSTRUN_SCRIPTS"; do
