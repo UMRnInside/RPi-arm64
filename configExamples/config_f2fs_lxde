@@ -21,7 +21,7 @@ HOSTNAME=raspberrypi
 
 # Image file configuration
 IMGFILE="dist/RPi-arm64-dist.img"
-IMGSIZE_MB=2560
+IMGSIZE_MB=3584
 BOOT_SIZE="100MiB"
 
 # Filesystem type

@@ -125,13 +125,13 @@ fi
 if [ ${INSTALL_EXTRA_RASPBIAN_SERVICES:=1} -eq 1 ]; then
     ./utils/install_raspbian_services.sh
 fi
-if [ $INSTALL_XFCE_XRDP -eq 1 ]; then
+if [ ${INSTALL_XFCE_XRDP:=0} -eq 1 ]; then
     ./utils/install_xfce_xrdp.sh
 fi
-if [ $INSTALL_LXDE -eq 1 ]; then
+if [ ${INSTALL_LXDE:=0} -eq 1 ]; then
     ./utils/install_lxde.sh
 fi
-if [ $INSTALL_LXDE_XRDP -eq 1 ]; then
+if [ ${INSTALL_LXDE_XRDP:=0} -eq 1 ]; then
     ./utils/install_lxde_xrdp.sh
 fi
 
