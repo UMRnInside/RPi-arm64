@@ -26,7 +26,9 @@ echo "Installing extra packages : "
 echo "  rfkill : WiFI controlling..."
 echo "  avahi-daemon : Aoto Discovery... (default service enabled)"
 echo "  ntpdate : time keeping (when interface UP)"
-chroot $ROOT_PATH apt install -y ntpdate rfkill avahi-daemon dhcpcd5 sudo usbutils wireless-tools bash-completion net-tools
+chroot $ROOT_PATH apt install -y ntpdate rfkill avahi-daemon dhcpcd5 
+#can't find dhcpcd5
+chroot $ROOT_PATH apt install -y sudo usbutils wireless-tools bash-completion net-tools
 
 # User:pi add to sudoers
 if [ $CONFIG_SUDO -eq 1 ]; then

@@ -6,7 +6,7 @@ RUN apt-get -y update && \
     apt-get -y install \
         wget busybox unzip patch parted \
         qemu-user-static debootstrap \
-        dosfstools btrfs-progs \
+        dosfstools btrfs-progs f2fs-utils \
         make build-essential bc xxd kmod vim \
         gcc-aarch64-linux-gnu g++-aarch64-linux-gnu \
     && apt-get -y clean \

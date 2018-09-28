@@ -21,6 +21,9 @@ Currently supported features:
 Prebuilt version can be found here: 
 [Baidu Netdisk](https://pan.baidu.com/s/1hsZVl1i)
 
+f2fs + desktop Prebuilt version can be found here: 
+[Baidu Netdisk](https://pan.baidu.com/s/1W6YMBoly5GfKc3OPWQI_yQ)
+
 If you preferred ubuntu built by Ubuntu-Base, see [chainsx/ubuntu64-rpi](https://github.com/chainsx/ubuntu64-rpi)
 
 ## Simple guide
@@ -28,6 +31,9 @@ It is really simple...
 
 1. Install dependencies, which goes like this on _Debian/Ubuntu_ :
 ```
+# Debian or Ubuntu
+./install_deps.sh
+
 # Debian
 apt-get -y install \
     wget busybox unzip tar patch parted \
@@ -50,6 +56,7 @@ apt-get -y install \
 
 But, if you want to modify some configuations...
 
+0. if you want f2fs or xfce , you can just copy file from configExamples to config
 1. `cp rpi3_defconfig config`
 2. edit `config`
 3. `./build.sh`
@@ -60,6 +67,8 @@ But, if you want to modify some configuations...
 > Is the Order a Rabbit?
 
 ## Docker build
+
+0. if you prefer f2fs or xfce , you can just copy file from configExamples 
 1. `cp rpi3_defconfig config`
 2. edit `config` on demand
 3. `./build_docker.sh`

@@ -1,0 +1,94 @@
+#!/bin/bash
+# Configuration of UMRnInside/RPi-arm64
+# See https://github.com/UMRnInside/RPi-arm64
+# It MUST be data. :)
+
+# Scripts to run before we actually start building the system
+# NOTE: The images are mounted.
+# Example:
+# PRERUN_SCRIPTS="./yourscript_1 ./yourscript_2"
+PRERUN_SCRIPTS=""
+
+# Scripts to run before we actually finish building the system
+# NOTE: The images are still mounted.
+POSTRUN_SCRIPTS=""
+
+# Generate image file, set to 0 to disable
+GENERATE_IMAGE=1
+
+# Set hostname
+HOSTNAME=raspberrypi
+
+# Image file configuration
+IMGFILE="dist/RPi-arm64-dist.img"
+IMGSIZE_MB=3584
+BOOT_SIZE="100MiB"
+
+# Filesystem type
+# TODO: Test various filesystems
+FSTYPE=f2fs
+ 
+# Stage 1
+# Set to 1 to skip the stage 1.
+# NOTE: You should make your kernel ready in build/kernel_dist
+SKIP_STAGE1=0
+# Compilation-related Variables
+
+ARCH=arm64
+CROSS_COMPILE=aarch64-linux-gnu-
+LINUX_BRANCH="rpi-4.14.y"
+FETCH_METHOD="wget"
+
+# Stage 2: Variables for debootstrap
+ 
+SUITE="testing"
+DEB_ARCH=arm64
+DEB_INCLUDE="" 
+#MIRROR="http://mirrors.163.com/debian/"
+MIRROR="http://httpredir.debian.org/debian/"
+ 
+## Allow you to run 32-bit ARM dynamically linked binaries 
+## Which was done by installing libc6:armhf or libc6:armel
+CONFIG_ARMHF_SUPPORT=1
+CONFIG_ARMEL_SUPPORT=0
+
+# Set to 0 to disable OpenSSH Server
+CONFIG_OPENSSH_SERVER=1
+
+# nonfree or brcm
+FIRMWARE_SOURCE="nonfree"
+
+# used when FIRMWARE_SOURCE=brcm
+# firmware-brcm80211 will be retrived from mirrordirector.raspbian.org
+# Set FWURL to overwrite it
+#FWURL=http://mirrors.163.com/raspbian/raspbian/pool/non-free/f/firmware-nonfree/firmware-brcm80211_20180825+dfsg-1_all.deb
+FWURL=http://mirrordirector.raspbian.org/raspbian/pool/non-free/f/firmware-nonfree/firmware-brcm80211_20180825+dfsg-1_all.deb
+
+# Stage 3
+USE_PARTUUID=1
+
+INSTALL_VC=1
+INSTALL_VC_SDK=1
+INSTALL_VC64=0
+
+# Stage 4
+NEW_USER=pi
+PASSWORD_USER=raspberry
+
+PASSWORD_ROOT=raspberry
+
+# Set to 1 to configure sudo
+CONFIG_SUDO=1
+
+# Wi-Fi hotspot
+# set to 0 to disable Wi-Fi Hotspot
+CONFIG_HOTSPOT=1
+
+SSID="U.M.R-RPi3"
+PSK="raspberry"
+IPADDR="172.16.233.1"
+
+INSTALL_EXTRA_WIRELESS_FIRMWARE=1
+INSTALL_EXTRA_RASPBIAN_SERVICES=1
+INSTALL_LXDE=1
+RESIZEFS_FIRSTBOOT=1
