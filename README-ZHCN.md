@@ -21,7 +21,7 @@
 
 预构建版本：[百度云](http://pan.baidu.com/s/1hsZVl1i)
 
-f2fs文件系统+桌面 预构建版本：[百度云](https://pan.baidu.com/s/1W6YMBoly5GfKc3OPWQI_yQ)
+f2fs文件系统+桌面 (xfce lxde i3wm rpi-chromium 官方浏览器) 预构建版本：[百度云](https://pan.baidu.com/s/1W6YMBoly5GfKc3OPWQI_yQ)
 
 如果您想要 _原汁原味（？）_ 的 _Ubuntu_ ：[chainsx/ubuntu64-rpi](https://github.com/chainsx/ubuntu64-rpi)
 
