@@ -135,6 +135,15 @@ if [ ${INSTALL_LXDE_XRDP:=0} -eq 1 ]; then
     ./utils/install_lxde_xrdp.sh
 fi
 
+if [ ${INSTALL_I3WM:=0} -eq 1 ]; then
+    ./utils/install_i3wm.sh
+fi
+if [ ${INSTALL_CHINESE:=0} -eq 1 ]; then
+    ./utils/install_chinese.sh
+fi
+if [ ${INSTALL_RASPI:=0} -eq 1 ]; then
+    ./utils/install_raspi.sh
+fi
 if [ "$POSTRUN_SCRIPTS" != "" ]; then
     for i in "$POSTRUN_SCRIPTS"; do
         $i
