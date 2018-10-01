@@ -19,9 +19,9 @@
 广告:
 树莓派64位系统交流群(QQ):697381661
 
-预构建版本：[百度云](http://pan.baidu.com/s/1hsZVl1i)
+预构建版本 (By UMRnInside)：[百度云](http://pan.baidu.com/s/1hsZVl1i)
 
-f2fs文件系统+桌面 (xfce lxde i3wm rpi-chromium 官方浏览器) 预构建版本：[百度云](https://pan.baidu.com/s/1W6YMBoly5GfKc3OPWQI_yQ)
+f2fs文件系统+桌面 (xfce/lxde/i3wm rpi-chromium 官方浏览器) 预构建版本 (By sherylynn)：[百度云](https://pan.baidu.com/s/1W6YMBoly5GfKc3OPWQI_yQ)
 
 如果您想要 _原汁原味（？）_ 的 _Ubuntu_ ：[chainsx/ubuntu64-rpi](https://github.com/chainsx/ubuntu64-rpi)
 
@@ -56,7 +56,7 @@ apt-get -y install \
 
 不过，如果您想手动更改某些设置……
 
-0. 如果需要桌面启动或者偏好f2fs,configExamples里有，可以直接cp到目录中的config
+0. 如果需要桌面环境或者偏好F2FS, configExamples里有，可以直接cp到目录中的config
 1. `cp rpi3_defconfig config`
 2. 按需编辑 `config`
 3. `./build.sh`

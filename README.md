@@ -18,10 +18,10 @@ Currently supported features:
 ************
 [中文版向导](README-ZHCN.md)
 
-Prebuilt version can be found here: 
+Prebuilt version (By UMRnInside):
 [Baidu Netdisk](https://pan.baidu.com/s/1hsZVl1i)
 
-f2fs + desktop (xfce i3wm lxde rpi-chromium) Prebuilt version can be found here:
+f2fs + desktop apps (xfce/i3wm/lxde rpi-chromium) Prebuilt version (By sherylynn):
 [Baidu Netdisk](https://pan.baidu.com/s/1W6YMBoly5GfKc3OPWQI_yQ)
 
 If you preferred ubuntu built by Ubuntu-Base, see [chainsx/ubuntu64-rpi](https://github.com/chainsx/ubuntu64-rpi)
@@ -56,7 +56,7 @@ apt-get -y install \
 
 But, if you want to modify some configuations...
 
-0. if you want f2fs or xfce , you can just copy file from configExamples to config
+0. if you want F2FS or XFCE , you can just copy file from configExamples to config
 1. `cp rpi3_defconfig config`
 2. edit `config`
 3. `./build.sh`
