@@ -1,4 +1,8 @@
-sudo apt install \
+#!/binbash
+# Privoded by sherylynn
+
+
+apt install \
   wget busybox unzip tar patch parted \
   qemu-user-static debootstrap \
   dosfstools btrfs-progs f2fs-tools\
