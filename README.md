@@ -62,9 +62,9 @@ But, if you want to modify some configuations...
 3. `./build.sh`
 4. Have a cup of tea/coffee/cola...
 
-> ご注文は うさぎ ですか？
+> 絶対だいじょうぶだよ！
 
-> Is the Order a Rabbit?
+> Absolutely NO PROBLEM!
 
 ## Docker build
 
