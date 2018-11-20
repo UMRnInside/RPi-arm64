@@ -1,4 +1,4 @@
-#!/binbash
+#!/bin/bash
 # Privoded by sherylynn
 
 
