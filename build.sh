@@ -31,8 +31,11 @@ if [ $GENERATE_IMAGE -eq 1 ]; then
     losetup $LOOPDEV $IMGFILE
     partprobe $LOOPDEV
     mkfs.vfat -n BOOT ${LOOPDEV}p1
-    if [ "$FSTYPE" = "f2fs" ];then
+    if [ "$FSTYPE" = "f2fs" ]; then
         mkfs.$FSTYPE -l ROOTFS ${LOOPDEV}p2
+    elif [ "$FSTYPE" = "btrfs" ]; then
+        # Fix "No space left" error
+        mkfs.$FSTYPE --nodesize 4096 -L ROOTFS ${LOOPDEV}p2
     else
         mkfs.$FSTYPE -L ROOTFS ${LOOPDEV}p2
     fi

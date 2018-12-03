@@ -25,5 +25,11 @@ fi
 popd
 
 echo "Installing firmware..."
-cp -a $BUILD_PATH/firmware-nonfree/ $ROOT_PATH/lib/firmware
+if [ ${BRCMONLY-1} -eq 1 ]; then
+    echo "Copy brcm only"
+    # or it might be too large ...
+    cp -a $BUILD_PATH/firmware-nonfree/brcm $ROOT_PATH/lib/firmware
+else
+    cp -a $BUILD_PATH/firmware-nonfree/ $ROOT_PATH/lib/firmware
+fi
 

@@ -62,6 +62,10 @@ FIRMWARE_SOURCE="nonfree"
 # Set FWURL to overwrite it
 FWURL=http://mirrordirector.raspbian.org/raspbian/pool/non-free/f/firmware-nonfree/firmware-brcm80211_20170823-1_all.deb
 
+# used when FIRMWARE_SOURCE=nonfree
+# if it is 1, it will install only brcm
+BRCMONLY=1
+
 # Stage 3
 USE_PARTUUID=1
 
