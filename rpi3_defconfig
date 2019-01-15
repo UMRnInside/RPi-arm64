@@ -60,7 +60,7 @@ FIRMWARE_SOURCE="nonfree"
 # used when FIRMWARE_SOURCE=brcm
 # firmware-brcm80211 will be retrived from mirrordirector.raspbian.org
 # Set FWURL to overwrite it
-FWURL=http://mirrordirector.raspbian.org/raspbian/pool/non-free/f/firmware-nonfree/firmware-brcm80211_20170823-1_all.deb
+FWURL=http://mirrordirector.raspbian.org/raspbian/pool/non-free/f/firmware-nonfree/firmware-brcm80211_20180825+dfsg-1_all.deb
 
 # used when FIRMWARE_SOURCE=nonfree
 # if it is 1, it will install only brcm
