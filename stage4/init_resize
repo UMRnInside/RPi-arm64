@@ -20,6 +20,7 @@ if [ ! $RESIZER ]; then
             ;;
         ext2|ext3|ext4)
             RESIZER=$(which resize2fs)
+            RESIZER_ARGS="-f"
             ;;
         btrfs)
             RESIZER=$(which btrfs)
