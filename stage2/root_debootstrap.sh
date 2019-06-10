@@ -29,7 +29,7 @@ fi
 echo "Running $DEBOOTSTRAP_BIN..."
 $DEBOOTSTRAP_BIN $DEB_ARGS --arch $DEB_ARCH --include $DEB_INCLUDE $SUITE $ROOT_PATH $MIRROR
 
-if [ ! ${SKIP_APTUPDATE-0} -eq 1 ]; then
+if [ ! ${SKIP_APTUPDATE-0} -eq 0 ]; then
     echo "Running apt-get update"
     chroot $ROOT_PATH apt-get update
 fi
