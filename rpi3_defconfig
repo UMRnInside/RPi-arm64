@@ -26,7 +26,7 @@ BOOT_SIZE="100MiB"
 
 # Filesystem type
 # TODO: Test various filesystems
-FSTYPE=btrfs
+FSTYPE=ext4
  
 # Stage 1
 # Set to 1 to skip the stage 1.
