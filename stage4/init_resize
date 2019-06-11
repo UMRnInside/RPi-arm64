@@ -21,6 +21,8 @@ if [ ! $RESIZER ]; then
         ext2|ext3|ext4)
             RESIZER=$(which resize2fs)
             RESIZER_ARGS="-f"
+            # Required when doing online resizing
+            mount -o remount,rw $RESIZE_TARGET
             ;;
         btrfs)
             RESIZER=$(which btrfs)
